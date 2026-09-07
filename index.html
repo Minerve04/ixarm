@@ -410,7 +410,7 @@
   <div class="wrap">
     <span class="eyebrow">Offres</span>
     <h2 class="sec-t">Un accès pour chaque acteur</h2>
-    <p class="sec-s">Le gratuit attire, l'abonnement fait tourner, la mise en relation fait décoller. Tarifs indicatifs — à caler.</p>
+    <p class="sec-s">100 % en ligne, self-service, sans engagement — résiliable en un clic. Le gratuit attire, l'abonnement fait tourner.</p>
     <div class="tiers">
       <div class="tier">
         <div class="tn">Gratuit</div>
@@ -419,29 +419,22 @@
         <ul><li>Veille publique</li><li>Cartes publiques (C-UAS, financeurs)</li><li>Navigateur de financement <b>limité</b></li></ul>
         <button class="btn ghost" onclick="openModal()">Commencer</button>
       </div>
-      <div class="tier">
-        <div class="tn">PME</div>
-        <div class="price">à partir de 149 €<small>/mois</small></div>
-        <div class="who">Les PME de défense qui cherchent capital et marchés.</div>
-        <ul><li>Veille personnalisée + alertes</li><li>Navigateur &amp; diagnostic complets</li><li>Accès annuaire BITD</li><li>2 notes / trimestre</li></ul>
-        <button class="btn" onclick="openModal()">Choisir PME</button>
-      </div>
       <div class="tier feature">
-        <div class="tn">Cabinet / Consultant</div>
-        <div class="price">à partir de 590 €<small>/mois</small></div>
-        <div class="who">Les cabinets qui refacturent l'intelligence à leurs clients.</div>
-        <ul><li>Tout PME, multi-sièges</li><li><b>Livrables white-label</b></li><li>Accès data &amp; API</li><li>Notes prioritaires</li></ul>
-        <button class="btn brass" onclick="openModal()">Choisir Cabinet</button>
+        <div class="tn">IXARM Pro</div>
+        <div class="price">49 €<small>/mois</small></div>
+        <div class="who">Pour les PME &amp; professionnels de la défense.</div>
+        <ul><li><b>Digest d'intelligence hebdo</b> par e-mail</li><li>Fil de signaux intégral + alertes</li><li>Navigateur &amp; diagnostic complets</li><li>Accès annuaire BITD (395)</li></ul>
+        <button class="btn brass" onclick="subscribe('pro')">S'abonner</button>
       </div>
       <div class="tier">
-        <div class="tn">Fonds / Prime</div>
-        <div class="price">Sur devis</div>
-        <div class="who">Sourcing et due diligence de deal-flow défense.</div>
-        <ul><li>Sourcing &amp; scoring de PME</li><li>Due diligence à la demande</li><li>Cartes de segment sur mesure</li><li>Notes illimitées</li></ul>
-        <button class="btn ghost" onclick="openModal()">Nous parler</button>
+        <div class="tn">IXARM Cabinet</div>
+        <div class="price">199 €<small>/mois</small></div>
+        <div class="who">Pour les cabinets &amp; fonds qui exploitent la donnée.</div>
+        <ul><li>Tout Pro, <b>multi-sièges</b></li><li>Accès <b>data &amp; API</b></li><li>Cartes &amp; exports white-label</li><li>Support prioritaire</li></ul>
+        <button class="btn" onclick="subscribe('cabinet')">S'abonner</button>
       </div>
     </div>
-    <p class="pricenote">+ Mise en relation (PME ↔ financeurs, PME ↔ primes) facturée au success fee — hors abonnement.</p>
+    <p class="pricenote">Paiement sécurisé par Stripe · résiliation en un clic depuis votre espace · tarifs indicatifs, ajustables.</p>
   </div>
 </section>
 
@@ -485,6 +478,9 @@ function openModal(){document.getElementById("modal").classList.add("on");docume
 function closeModal(){document.getElementById("modal").classList.remove("on");}
 document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
+/* Liens Stripe Checkout (Payment Links) — remplir avec vos URLs Stripe pour activer le paiement self-service */
+var STRIPE={pro:"",cabinet:""};
+function subscribe(plan){var u=STRIPE[plan];if(u){window.open(u,"_blank","noopener");}else{openModal();}}
 function submitLead(){
   var em=document.getElementById("m-email").value.trim();
   if(!em||em.indexOf("@")<0){document.getElementById("m-email").focus();document.getElementById("m-email").style.borderColor="var(--gap)";return;}
