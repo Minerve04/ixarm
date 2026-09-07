@@ -332,6 +332,7 @@
         <div class="mapc"><h4>Carte C-UAS Europe</h4><p>~30 acteurs anti-drones par couche capacitaire, avec les signaux de marché.</p><a href="https://claude.ai/code/artifact/e2474db2-5a66-4a35-943c-653824e37533" target="_blank" rel="noopener">Ouvrir la carte →</a></div>
         <div class="mapc"><h4>Carte des financeurs</h4><p>~65 fonds défense/dual-use par type et stade, avec le guide « quelle porte ».</p><a href="https://claude.ai/code/artifact/a72f4d86-d118-43ba-8b7b-edfed26c6e9e" target="_blank" rel="noopener">Ouvrir la carte →</a></div>
         <div class="mapc"><h4>Annuaire BITD</h4><p>Les entreprises de la base industrielle française, filtrables et référencées — enrichi en continu.</p><a href="https://deftechfrance.fr/annuaire.html" target="_blank" rel="noopener">Ouvrir l'annuaire →</a></div>
+        <div class="mapc"><h4>Digest hebdo</h4><p>L'essentiel — levées, contrats, programmes, M&amp;A — trié et décrypté chaque semaine.</p><a href="digest.html" target="_blank" rel="noopener">Lire l'édition #1 →</a></div>
       </div>
     </div>
 
@@ -423,7 +424,7 @@
         <div class="tn">IXARM Pro</div>
         <div class="price">29 €<small>/mois</small></div>
         <div class="who">Pour les PME &amp; professionnels de la défense.</div>
-        <ul><li>Fil de signaux intégral</li><li>Navigateur &amp; diagnostic complets</li><li>Accès annuaire BITD complet</li><li><b>Digest d'intelligence hebdo</b> par e-mail <span class="mono" style="font-size:11px;color:var(--ink-faint)">bientôt</span></li></ul>
+        <ul><li>Fil de signaux intégral</li><li>Navigateur &amp; diagnostic complets</li><li>Accès annuaire BITD complet</li><li><b>Digest d'intelligence hebdo</b> par e-mail — <a href="digest.html" target="_blank" rel="noopener">voir l'édition #1</a></li></ul>
         <button class="btn brass" onclick="subscribe('pro')">S'abonner</button>
       </div>
       <div class="tier">
@@ -499,10 +500,9 @@ var SIGNALS=[
   {t:"levee",tl:"Levée",h:"Frankenburg Technologies lève 30 M€ en Série A",m:"Missiles intercepteurs · Estonie",d:"2026"}
 ];
 var SIGNALS_LOCK=[
-  {t:"contrat",tl:"Analyse",h:"Qui va racheter les 35 plateformes C-UAS européennes",m:"Thèse de consolidation",d:"Premium"},
-  {t:"levee",tl:"Cible",h:"12 PME françaises « effecteur bas-coût » pré-levée",m:"Deal sourcing",d:"Premium"},
-  {t:"reg",tl:"Réglementaire",h:"Double usage : ce que change la révision du règlement UE",m:"Conformité export",d:"Premium"},
-  {t:"prog",tl:"Décryptage",h:"EDF 2026 : lire entre les lignes des appels",m:"Financement",d:"Premium"}
+  {t:"contrat",tl:"Analyse",h:"La consolidation du C-UAS européen a commencé",m:"Asterion racheté · Cambridge lève 300 M$",d:"Digest #1"},
+  {t:"levee",tl:"Cas",h:"Harmattan AI : le contrat DGA qui précède la levée de 200 M$",m:"Commande publique → valorisation",d:"Digest #1"},
+  {t:"prog",tl:"Programme",h:"Rafale F5 : qui capte les premiers contrats de développement",m:"Dassault · Safran · Thales · MBDA",d:"Digest #1"}
 ];
 function sigRow(s){return '<div class="sig"><span class="type t-'+s.t+'">'+s.tl+'</span><div><div class="h">'+s.h+'</div><div class="m">'+s.m+'</div></div><span class="d">'+s.d+'</span></div>';}
 document.getElementById("feedlock").innerHTML=SIGNALS_LOCK.map(sigRow).join("");

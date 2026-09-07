@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IXARM · Digest #1 — semaine du 1er septembre 2026</title>
+<meta name="description" content="Le digest d'intelligence IXARM — levées, contrats, programmes et consolidation de la défense & dual-use européenne. Édition #1, aperçu public.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cline x1='8' y1='8' x2='32' y2='32' stroke='%231A5FCC' stroke-width='6.5' stroke-linecap='round'/%3E%3Cline x1='32' y1='8' x2='8' y2='32' stroke='%233C5A73' stroke-width='6.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F2F4F7;--panel:#FFFFFF;--ink:#121821;--ink-soft:#4C5865;--ink-faint:#7E8B99;
+    --line:#DBE0E7;--line-soft:#E8ECF1;--brass:#1A5FCC;--brass-bg:#E3EDFB;
+    --signal:#3C5A73;--signal-bg:#E5ECF2;--capture:#1E7A4D;--capture-bg:#DDF0E5;--gap:#BE4326;--gap-bg:#F7E4DE;
+    --shadow:0 1px 2px rgba(18,24,33,.05),0 10px 28px rgba(18,24,33,.07);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ground:#0A0E13;--panel:#161E29;--ink:#E7ECF2;--ink-soft:#9AA7B5;--ink-faint:#63707E;
+    --line:#232E3B;--line-soft:#1A2230;--brass:#4D93F0;--brass-bg:#0F2136;
+    --signal:#7CA4C4;--signal-bg:#10202C;--capture:#4FB985;--capture-bg:#0F241A;--gap:#E07C57;--gap-bg:#2A1712;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.5);
+  }}
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;margin:0}
+  a{color:var(--brass)}
+  h1,h2,h3{font-family:"Sora",sans-serif;margin:0;letter-spacing:-.015em;line-height:1.14;text-wrap:balance}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--brass)}
+
+  header{padding:34px 0 22px;border-bottom:1px solid var(--line)}
+  .brand{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;text-decoration:none;color:var(--ink)}
+  .brand svg{width:24px;height:24px}
+  .brand .wm{font-family:"Sora",sans-serif;font-size:18px;font-weight:800;letter-spacing:.06em}
+  h1{font-size:clamp(26px,4.2vw,36px);font-weight:800;margin-top:8px}
+  .meta{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-faint);margin-top:12px}
+  header p.lede{color:var(--ink-soft);font-size:16.5px;margin:14px 0 0;max-width:62ch}
+
+  section{padding:26px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--signal);margin-bottom:16px;font-family:"IBM Plex Mono",monospace}
+  .item{padding:13px 0;border-top:1px solid var(--line-soft)}
+  .item:first-of-type{border-top:none}
+  .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-right:8px;vertical-align:1px}
+  .t-levee{color:var(--capture);background:var(--capture-bg)}
+  .t-contrat{color:var(--brass);background:var(--brass-bg)}
+  .t-ma{color:var(--gap);background:var(--gap-bg)}
+  .item h3{display:inline;font-size:16.5px;font-weight:700}
+  .item .sub{color:var(--ink-soft);font-size:14.5px;margin:5px 0 0}
+  .item .src{font-family:"IBM Plex Mono",monospace;font-size:11.5px;margin-top:5px}
+  .item .src a{color:var(--ink-faint)}
+
+  .analyse{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:18px 20px;margin-top:14px;box-shadow:var(--shadow)}
+  .analyse .k{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);background:var(--brass-bg);border-radius:100px;padding:2px 8px}
+  .analyse h3{font-size:17px;font-weight:700;margin:10px 0 6px}
+  .analyse p{font-size:14.8px;color:var(--ink-soft);margin:0 0 8px}
+  .analyse p b{color:var(--ink);font-weight:600}
+
+  .cta{background:var(--signal-bg);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin:26px 0;text-align:center}
+  .cta h3{font-size:18px;font-weight:800;margin-bottom:6px}
+  .cta p{font-size:14.5px;color:var(--ink-soft);margin:0 auto 14px;max-width:52ch}
+  .btn{display:inline-block;font-family:"Sora",sans-serif;font-weight:700;font-size:14px;text-decoration:none;border-radius:9px;padding:11px 20px;background:var(--brass);color:#fff}
+
+  .note{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);background:var(--panel);border:1px dashed var(--line);border-radius:8px;padding:12px 14px;margin-top:18px;line-height:1.6}
+  footer{padding:22px 0 56px}
+  footer p{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="https://ixarm.fr"><svg viewBox="0 0 40 40" aria-hidden="true"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="6.5" stroke-linecap="round"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="6.5" stroke-linecap="round"/></svg><span class="wm">IXARM</span></a>
+    <span class="eyebrow">Digest d'intelligence · Édition #1</span>
+    <h1>Défense &amp; dual-use européen — ce qui a bougé</h1>
+    <div class="meta">Semaine du 1<sup>er</sup> septembre 2026 · levées · contrats · programmes · consolidation</div>
+    <p class="lede">L'essentiel des flux de capital et de commande publique dans la défense et le dual-use, trié et décrypté pour les PME et leurs conseils. Sources ouvertes, vérifiées.</p>
+  </header>
+
+  <section>
+    <h2>Levées &amp; capital</h2>
+    <div class="item"><span class="tag t-levee">Levée</span><h3>Cambridge Aerospace — 300 M$ (Série C)</h3><p class="sub">Intercepteurs bas-coût contre drones et menaces aériennes. La plus grosse opération C-UAS du trimestre. · Royaume-Uni</p></div>
+    <div class="item"><span class="tag t-levee">Levée</span><h3>Harmattan AI — 200 M$ (Série B)</h3><p class="sub">Systèmes de défense pilotés par IA (drones, C2). · France</p></div>
+    <div class="item"><span class="tag t-levee">Levée</span><h3>Alta Ares — 57 M$ (Série A)</h3><p class="sub">Intercepteurs guidés par IA pour identifier et détruire drones et missiles. · France</p></div>
+    <div class="item"><span class="tag t-levee">Levée</span><h3>Sensofusion — 45 M€ (Série B)</h3><p class="sub">Détection RF et sécurisation de l'espace aérien. · Finlande</p></div>
+    <div class="item"><span class="tag t-levee">Levée</span><h3>TYTAN Technologies — 30 M€ (Série A)</h3><p class="sub">Drones intercepteurs autonomes. · Allemagne</p></div>
+    <div class="item"><span class="tag t-levee">Levée</span><h3>Frankenburg Technologies — 30 M€ (Série A)</h3><p class="sub">Missiles intercepteurs bas-coût anti-drones. · Estonie</p></div>
+    <div class="item src mono">Sources : <a href="https://www.vestbee.com/insights/articles/europ-s-defence-top-deals-in-early-2026" target="_blank" rel="noopener">Vestbee</a> · <a href="https://newmarketpitch.com/blogs/news/counter-uas-funding-news" target="_blank" rel="noopener">New Market Pitch</a></div>
+  </section>
+
+  <section>
+    <h2>Contrats &amp; programmes</h2>
+    <div class="item"><span class="tag t-contrat">Programme</span><h3>Rafale F5 — la DGA notifie les premiers contrats de développement</h3><p class="sub">Dassault Aviation (maître d'œuvre), Safran Aircraft Engines (évolution moteur M88 T-REX, budget estimé ~600 M€), Thales (radar RBE2 XG, suite d'autoprotection), MBDA. Cible : 47 Rafale F5 d'ici 2035. · France</p><p class="src mono"><a href="https://www.opex360.com/2026/09/04/la-direction-generale-de-larmement-a-notifie-les-premiers-contrats-pour-le-developpement-du-rafale-f5/" target="_blank" rel="noopener">opex360 — 4 sept. 2026</a></p></div>
+    <div class="item"><span class="tag t-contrat">Contrat</span><h3>1 000 « drones du combattant » notifiés à Harmattan AI</h3><p class="sub">Micro-drones quadricoptères (1,8 kg, 2 km, 40 min, optronique) pour l'entraînement et la préparation opérationnelle, priorité à l'exercice Orion. · France</p><p class="src mono"><a href="https://www.defense.gouv.fr/dga/actualites/dga-commande-1-000-drones-du-combattant" target="_blank" rel="noopener">Ministère des Armées / DGA</a></p></div>
+    <div class="item"><span class="tag t-contrat">Programme</span><h3>La DGA renforce les drones tactiques aériens embarqués de la Marine</h3><p class="sub">Montée en puissance des capacités ISR aériennes sur bâtiments de la Marine nationale. · France</p><p class="src mono"><a href="https://www.defense.gouv.fr/dga/actualites/dga-renforce-capacites-drones-tactiques-aeriens-embarques-marine-nationale" target="_blank" rel="noopener">Ministère des Armées / DGA</a></p></div>
+  </section>
+
+  <section>
+    <h2>Consolidation &amp; M&amp;A</h2>
+    <div class="item"><span class="tag t-ma">M&amp;A</span><h3>Collective Defence rachète Asterion — ensemble &gt; 1 Md$</h3><p class="sub">Collective Defence (cyber, threat intel — issu d'ITC Secure + IronNet) absorbe Asterion (C-UAS : détection RF, tracking IA, effecteurs cinétiques et non-cinétiques, déployé en Ukraine et au Moyen-Orient). Fusion cyber + anti-drone en « une seule architecture de sécurité ». · Luxembourg</p><p class="src mono"><a href="https://dronelife.com/2026/06/03/collective-defence-acquires-asterion-in-1-billion-deal-combining-cybersecurity-and-counter-drone-technology/" target="_blank" rel="noopener">DroneLife — 3 juin 2026</a></p></div>
+  </section>
+
+  <section>
+    <h2>Décryptage IXARM</h2>
+    <div class="analyse">
+      <span class="k">Analyse</span>
+      <h3>La consolidation du C-UAS européen a commencé</h3>
+      <p>Le rachat d'<b>Asterion</b> par Collective Defence et la Série C de <b>300 M$</b> de Cambridge Aerospace pointent dans la même direction : le marché anti-drone, aujourd'hui éclaté entre 35+ acteurs, bascule vers des <b>plateformes intégrées</b> (cyber + détection + effecteur). <span class="mono" style="font-size:11px;color:var(--ink-faint)">— lecture IXARM, pas une information confirmée par les acteurs.</span></p>
+      <p>Pour une PME française, deux postures : se rendre <b>intégrable</b> (une brique claire — RF, optronique, effecteur — avec interfaces ouvertes), ou se préparer à devenir <b>cible d'acquisition</b>. Les deux exigent une référence étatique et une IP défendable. Le milieu de gamme non différencié est la zone à risque.</p>
+    </div>
+    <div class="analyse">
+      <span class="k">Cas</span>
+      <h3>Harmattan AI : le contrat public qui précède la levée</h3>
+      <p>Harmattan AI a décroché la commande DGA de <b>1 000 micro-drones</b> (2025) <b>avant</b> de lever <b>200 M$</b> en Série B (2026). L'ordre compte : la <b>commande étatique</b> a agi comme catalyseur de valorisation. <span class="mono" style="font-size:11px;color:var(--ink-faint)">— mise en perspective IXARM.</span></p>
+      <p>Leçon pour les PME : pour un investisseur défense, <b>une référence de commande vaut souvent plus qu'un chiffre d'affaires commercial</b>. Séquencer « premier contrat public → levée » plutôt que l'inverse. C'est exactement ce que le navigateur de financement IXARM aide à cartographier : quel guichet public viser à quel stade.</p>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h3>Recevoir le digest chaque semaine</h3>
+    <p>Cette édition #1 est un aperçu public. Le digest hebdo complet — avec le fil de signaux intégral et les décryptages — arrive par e-mail avec l'abonnement IXARM Pro.</p>
+    <a class="btn" href="https://ixarm.fr/#offres">Voir les offres</a>
+  </div>
+
+  <div class="note">
+    Méthode : sources ouvertes vérifiées (presse spécialisée, communiqués officiels DGA/Ministère des Armées, bases de deals). Les blocs « Décryptage IXARM » sont des analyses éditoriales, signalées comme telles, et non des informations attribuées aux acteurs cités. Ni conseil en investissement, ni garantie d'éligibilité.
+  </div>
+
+  <footer>
+    <p>IXARM · Digest d'intelligence défense &amp; dual-use — <a href="https://ixarm.fr">ixarm.fr</a>. Édition #1, semaine du 1<sup>er</sup> septembre 2026.</p>
+  </footer>
+</div>
+</body>
+</html>
