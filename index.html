@@ -488,8 +488,9 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()
 function submitLead(){
   var em=document.getElementById("m-email").value.trim();
   if(!em||em.indexOf("@")<0){document.getElementById("m-email").focus();document.getElementById("m-email").style.borderColor="var(--gap)";return;}
-  var lead={email:em,profil:document.getElementById("m-profil").value,msg:document.getElementById("m-msg").value,ts:new Date().toISOString()};
+  var lead={email:em,profil:document.getElementById("m-profil").value,message:document.getElementById("m-msg").value,source:"ixarm.fr",ts:new Date().toISOString()};
   try{var k="ixarm_leads";var arr=JSON.parse(localStorage.getItem(k)||"[]");arr.push(lead);localStorage.setItem(k,JSON.stringify(arr));}catch(e){}
+  try{fetch("https://hook.eu1.make.com/h8ufqaegsee1djnfdrfastb9bqs4sl0u",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(lead).toString()});}catch(e){}
   document.getElementById("form1").style.display="none";document.getElementById("form2").style.display="";
 }
 
@@ -508,8 +509,9 @@ var SIGNALS_LOCK=[
   {t:"prog",tl:"Décryptage",h:"EDF 2026 : lire entre les lignes des appels",m:"Financement",d:"Premium"}
 ];
 function sigRow(s){return '<div class="sig"><span class="type t-'+s.t+'">'+s.tl+'</span><div><div class="h">'+s.h+'</div><div class="m">'+s.m+'</div></div><span class="d">'+s.d+'</span></div>';}
-document.getElementById("feed").innerHTML=SIGNALS.map(sigRow).join("");
 document.getElementById("feedlock").innerHTML=SIGNALS_LOCK.map(sigRow).join("");
+(function(){function paint(list){document.getElementById("feed").innerHTML=(list&&list.length?list:SIGNALS).map(sigRow).join("");}
+fetch("signals.json",{cache:"no-store"}).then(function(r){return r.json();}).then(paint).catch(function(){paint(SIGNALS);});})();
 
 var BITD=[
   {n:"Thales",r:"Île-de-France",s:"Systèmes intégrés, C-UAS",g:"Contrat"},
@@ -533,6 +535,7 @@ function renderBitd(q){
 }
 document.getElementById("bitdsearch").addEventListener("input",function(e){renderBitd(e.target.value);});
 renderBitd("");
+fetch("bitd.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.length){BITD=d;}renderBitd(document.getElementById("bitdsearch").value);}).catch(function(){});
 
 function runDiag(){
   var nat=document.getElementById("dg-nature").value,pf=document.getElementById("dg-profil").value,fr=document.getElementById("dg-nat").value;

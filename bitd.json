@@ -1,0 +1,14 @@
+[
+  {"n":"Thales","r":"Île-de-France","s":"Systèmes intégrés, C-UAS","g":"Contrat"},
+  {"n":"MBDA France","r":"Île-de-France","s":"Effecteurs / missiles","g":"Contrat"},
+  {"n":"CerbAir","r":"Île-de-France","s":"Détection drones (RF)","g":"Émergent"},
+  {"n":"Novadem","r":"PACA","s":"Micro-drones ISR","g":"Déployé"},
+  {"n":"Exavision","r":"Occitanie","s":"Optronique","g":"—"},
+  {"n":"Diodon Drone Technology","r":"Nouvelle-Aquitaine","s":"Drones résilients","g":"Levée"},
+  {"n":"Unseenlabs","r":"Bretagne","s":"SIGINT spatial","g":"Levée"},
+  {"n":"Preligens (Safran.AI)","r":"Île-de-France","s":"IA d'analyse d'images","g":"Acquis"},
+  {"n":"Cilas","r":"Nouvelle-Aquitaine","s":"Laser / énergie dirigée","g":"Contrat"},
+  {"n":"Delair","r":"Occitanie","s":"Drones longue endurance","g":"Déployé"},
+  {"n":"Hologarde","r":"Île-de-France","s":"Détection multi-capteurs","g":"Émergent"},
+  {"n":"Photonis (Exosens)","r":"Normandie","s":"Vision nocturne","g":"Coté"}
+]
