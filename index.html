@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IXARM — La plateforme des PME de la défense</title>
+<meta name="description" content="IXARM — financements, aides publiques et cartographie de l'écosystème pour les PME de la défense.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cline x1='8' y1='8' x2='32' y2='32' stroke='%231A5FCC' stroke-width='7' stroke-linecap='round'/%3E%3Cline x1='32' y1='8' x2='8' y2='32' stroke='%233C5A73' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F2F4F7; --surface:#F9FAFC; --panel:#FFFFFF;
+    --ink:#121821; --ink-soft:#4C5865; --ink-faint:#7E8B99;
+    --line:#DBE0E7; --line-soft:#E8ECF1;
+    --brass:#1A5FCC; --brass-bg:#E3EDFB;
+    --signal:#3C5A73; --signal-bg:#E5ECF2;
+    --capture:#1E7A4D; --capture-bg:#DDF0E5;
+    --gap:#BE4326; --gap-bg:#F6E5DF;
+    --shadow:0 1px 2px rgba(18,24,33,.05),0 10px 30px rgba(18,24,33,.07);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ground:#0A0E13; --surface:#111823; --panel:#161E29;
+    --ink:#E7ECF2; --ink-soft:#9AA7B5; --ink-faint:#63707E;
+    --line:#232E3B; --line-soft:#1A2230;
+    --brass:#4D93F0; --brass-bg:#0F2136;
+    --signal:#7CA4C4; --signal-bg:#10202C;
+    --capture:#4FB985; --capture-bg:#0F241A;
+    --gap:#E07C57; --gap-bg:#2A150E;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.5);
+  }}
+  :root[data-theme="dark"]{
+    --ground:#0A0E13; --surface:#111823; --panel:#161E29;
+    --ink:#E7ECF2; --ink-soft:#9AA7B5; --ink-faint:#63707E;
+    --line:#232E3B; --line-soft:#1A2230;
+    --brass:#4D93F0; --brass-bg:#0F2136;
+    --signal:#7CA4C4; --signal-bg:#10202C;
+    --capture:#4FB985; --capture-bg:#0F241A;
+    --gap:#E07C57; --gap-bg:#2A150E;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  img{max-width:100%}
+  body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:"Sora","IBM Plex Sans",sans-serif;text-wrap:balance;line-height:1.12;margin:0;letter-spacing:-.01em}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:inherit}
+
+  .bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:1080px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:16px}
+  .brand{display:inline-flex;align-items:center;gap:10px;white-space:nowrap}
+  .brand svg{display:block;width:26px;height:26px}
+  .brand .wm{font-family:"Sora",sans-serif;font-size:20px;font-weight:800;letter-spacing:.06em}
+  .badge-demo{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass);border:1px solid var(--brass);border-radius:4px;padding:1px 6px}
+  nav.top{display:flex;gap:2px;margin-left:10px;flex-wrap:wrap}
+  nav.top button{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-soft);background:none;border:none;padding:7px 12px;border-radius:6px;cursor:pointer}
+  nav.top button:hover{background:var(--surface);color:var(--ink)}
+  nav.top button[aria-current="true"]{color:var(--brass);background:var(--brass-bg);font-weight:600}
+  .bar .cta{margin-left:auto}
+  .btn{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;border-radius:7px;padding:9px 16px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--ground);transition:.12s;white-space:nowrap}
+  .btn:hover{opacity:.88}
+  .btn.ghost{background:none;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--brass);color:var(--brass);opacity:1}
+  .btn.brass{background:var(--brass);border-color:var(--brass);color:#fff}
+  .btn.brass:hover{opacity:.9}
+
+  .view{padding:40px 0 60px;display:none}
+  .view.on{display:block}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--brass)}
+  .sec-t{font-size:clamp(22px,3.2vw,30px);font-weight:700;margin-bottom:4px}
+  .sec-s{color:var(--ink-soft);font-size:15.5px;max-width:64ch;margin-bottom:20px}
+
+  .hero{padding:52px 0 44px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.35fr .65fr;gap:30px;align-items:center}
+  .hero h1{font-size:clamp(36px,6vw,66px);font-weight:800;letter-spacing:-.03em}
+  .hero .lede{font-size:clamp(18px,2.3vw,22px);color:var(--ink-soft);margin-top:20px;max-width:44ch}
+  .hero .lede b{color:var(--ink);font-weight:600}
+  .hero-cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .hero-mark{display:flex;align-items:center;justify-content:center}
+  .hero-mark svg{width:100%;max-width:230px;height:auto;filter:drop-shadow(0 12px 30px rgba(26,95,204,.18))}
+  .trust{margin-top:26px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-faint);letter-spacing:.01em;line-height:1.7;border-top:1px solid var(--line);padding-top:16px;max-width:72ch;grid-column:1/-1}
+  .trust b{color:var(--ink-soft)}
+
+  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:34px 0}
+  .stat{background:var(--panel);padding:16px 18px 14px}
+  .stat .fig{font-family:"Sora",sans-serif;font-weight:800;font-size:27px;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+  .stat .cap{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.03em;color:var(--ink-soft);text-transform:uppercase;margin-top:10px;line-height:1.45}
+
+  .mods{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .mod{border:1px solid var(--line);border-radius:12px;padding:26px;background:var(--panel);box-shadow:var(--shadow);cursor:pointer;transition:.14s;border-top:3px solid var(--brass)}
+  .mod:hover{transform:translateY(-2px);border-color:var(--brass)}
+  .mod .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  .mod h3{font-size:23px;font-weight:700;margin:8px 0 8px}
+  .mod p{color:var(--ink-soft);font-size:15.5px}
+  .mod .go{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--brass);font-weight:600;margin-top:14px;display:inline-block}
+
+  .modblk{margin-top:34px}
+  .modblk-h{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--brass);padding-bottom:7px;margin-bottom:16px}
+  .modblk-h h3{font-size:19px;font-weight:700}
+  .modblk-h .pill{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:100px}
+  .free{color:var(--capture);background:var(--capture-bg)}
+  .prem{color:var(--brass);background:var(--brass-bg)}
+  .modblk-h .r{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint)}
+
+  .feed{display:grid;gap:8px}
+  .sig{display:grid;grid-template-columns:96px 1fr auto;gap:14px;align-items:center;padding:13px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+  .sig .type{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:5px;text-align:center}
+  .t-contrat{color:var(--signal);background:var(--signal-bg)}
+  .t-levee{color:var(--capture);background:var(--capture-bg)}
+  .t-ao{color:var(--brass);background:var(--brass-bg)}
+  .t-reg{color:var(--gap);background:var(--gap-bg)}
+  .t-prog{color:var(--ink);background:var(--line-soft)}
+  .sig .h{font-weight:600;font-size:15.5px}
+  .sig .m{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-faint);margin-top:2px}
+  .sig .d{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .lockwrap{position:relative;margin-top:10px;border:1px dashed var(--brass);border-radius:10px;overflow:hidden}
+  .lockwrap .feed{filter:blur(4px);opacity:.5;pointer-events:none;padding:8px}
+  .lockover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:color-mix(in srgb,var(--ground) 42%,transparent);text-align:center;padding:20px}
+  .lockover .lt{font-family:"Sora",sans-serif;font-weight:700;font-size:19px}
+  .lockover .ls{font-size:14px;color:var(--ink-soft);max-width:40ch}
+
+  .maps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .mapc{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:18px 20px;border-left:3px solid var(--signal);display:flex;flex-direction:column}
+  .mapc h4{font-size:17px;font-weight:600;margin-bottom:5px}
+  .mapc p{font-size:14px;color:var(--ink-soft);flex:1}
+  .mapc a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--brass);font-weight:600;margin-top:12px;text-decoration:none;border-bottom:1px solid var(--line);align-self:flex-start;padding-bottom:1px}
+  .mapc a:hover{border-color:var(--brass)}
+
+  .search{width:100%;font-family:"IBM Plex Mono",monospace;font-size:14px;padding:11px 14px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);margin-bottom:12px}
+  .search::placeholder{color:var(--ink-faint)}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  thead th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:8px 10px;border-bottom:1.5px solid var(--ink);font-weight:600}
+  tbody td{padding:10px;border-bottom:1px solid var(--line-soft);color:var(--ink-soft)}
+  tbody td:first-child{color:var(--ink);font-weight:600}
+  tbody tr:hover{background:var(--surface)}
+  .tbl-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+  .tbl-wrap .scroll{overflow-x:auto}
+
+  .notec{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:22px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .notec .txt{flex:1;min-width:240px}
+  .notec h4{font-size:19px;font-weight:600;margin-bottom:5px}
+  .notec p{font-size:14.5px;color:var(--ink-soft)}
+
+  .diag{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+  .diag .row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+  .diag .fld{flex:1;min-width:150px}
+  .diag label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;display:block;margin-bottom:6px}
+  .diag select{width:100%;font-family:"IBM Plex Mono",monospace;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+  .diag .out{margin-top:16px;padding:14px 16px;border-radius:8px;background:var(--brass-bg);border:1px solid var(--brass);font-size:15px;color:var(--ink);display:none}
+  .diag .out.on{display:block}
+  .diag .out b{color:var(--brass)}
+
+  .ctrl+.ctrl{margin-top:16px}
+  .ctrl-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-bottom:9px}
+  .seg{display:flex;flex-wrap:wrap;gap:7px}
+  .seg button{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;color:var(--ink-soft);background:var(--surface);border:1px solid var(--line);border-radius:100px;padding:8px 15px;cursor:pointer}
+  .seg button:hover{border-color:var(--brass);color:var(--ink)}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+  .seg.dom button[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:#fff}
+  .row2{display:flex;gap:24px;flex-wrap:wrap;margin-top:16px}
+  .toggle{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14.5px;color:var(--ink-soft)}
+  .toggle input{appearance:none;width:38px;height:22px;background:var(--line);border-radius:100px;position:relative;cursor:pointer;flex:none}
+  .toggle input:checked{background:var(--capture)}
+  .toggle input::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .15s}
+  .toggle input:checked::after{transform:translateX(16px)}
+  .toggle b{color:var(--ink);font-weight:600}
+  .ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:18px}
+  .rung{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer}
+  .rung:hover{border-color:var(--brass)}
+  .rung[data-on="true"]{background:var(--brass-bg);border-color:var(--brass)}
+  .rung .rl{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-soft);display:block;line-height:1.3}
+  .rung[data-on="true"] .rl{color:var(--brass)}
+  .rung .rc{font-family:"Sora",sans-serif;font-weight:800;font-size:19px;margin-top:2px;font-variant-numeric:tabular-nums}
+  .navpanel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow)}
+  .sumbar{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 0 4px;padding-bottom:9px;border-bottom:1.5px solid var(--ink)}
+  .sumbar h3{font-size:19px;font-weight:700}
+  .sumbar .cnt{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--brass);font-weight:600}
+  #navresults{display:grid;gap:9px;margin-top:14px}
+  .fcard{display:grid;grid-template-columns:5px 1fr auto;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .fcard .stripe{background:var(--ink-faint)}
+  .fcard.f-public .stripe{background:var(--signal)}
+  .fcard.f-dedie .stripe{background:var(--brass)}
+  .fcard.f-deeptech .stripe{background:var(--ink-soft)}
+  .fcard.f-us .stripe{background:var(--ink-faint)}
+  .fcard.f-corp .stripe{background:var(--capture)}
+  .fcard .bd{padding:14px 18px}
+  .fcard .top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .fcard .nm{font-family:"Sora",sans-serif;font-weight:600;font-size:17px}
+  .fcard .cc{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  .fcard .fam{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);margin-left:auto}
+  .fcard .why{font-size:14.5px;color:var(--ink-soft);margin-top:5px}
+  .fcard .why b{color:var(--ink);font-weight:600}
+  .fcard .stages{display:flex;gap:5px;margin-top:9px;flex-wrap:wrap}
+  .stg{font-family:"IBM Plex Mono",monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:var(--line-soft);color:var(--ink-faint)}
+  .stg.on{background:var(--brass-bg);color:var(--brass);font-weight:600}
+  .fcard .side{padding:14px 16px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;border-left:1px solid var(--line-soft);min-width:92px}
+  .fcard .sz{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:600;color:var(--ink)}
+  .fcard .szl{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);margin-top:3px}
+
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px}
+  .tier{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:24px 22px;display:flex;flex-direction:column}
+  .tier.feature{border-color:var(--brass);border-width:2px;box-shadow:var(--shadow)}
+  .tier .tn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  .tier .price{font-family:"Sora",sans-serif;font-weight:800;font-size:30px;margin:10px 0 2px;letter-spacing:-.02em}
+  .tier .price small{font-size:14px;font-weight:400;color:var(--ink-faint);font-family:"IBM Plex Mono",monospace}
+  .tier .who{font-size:14px;color:var(--ink-soft);margin-bottom:14px;min-height:2.6em}
+  .tier ul{list-style:none;margin:0 0 18px;padding:0;flex:1}
+  .tier li{font-size:14px;color:var(--ink-soft);padding:6px 0 6px 22px;position:relative;border-top:1px solid var(--line-soft)}
+  .tier li::before{content:"→";position:absolute;left:0;color:var(--brass);font-family:"IBM Plex Mono",monospace}
+  .tier li b{color:var(--ink);font-weight:600}
+  .tier .btn{width:100%;text-align:center}
+  .pricenote{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-faint);margin-top:16px;text-align:center}
+
+  .modal{position:fixed;inset:0;z-index:100;background:rgba(6,10,15,.6);display:none;align-items:center;justify-content:center;padding:20px}
+  .modal.on{display:flex}
+  .sheet{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:460px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  .sheet h3{font-size:23px;font-weight:700;margin-bottom:6px}
+  .sheet p{font-size:15px;color:var(--ink-soft);margin-bottom:18px}
+  .sheet label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;display:block;margin:12px 0 6px}
+  .sheet input,.sheet select,.sheet textarea{width:100%;font-family:"IBM Plex Sans",sans-serif;font-size:15px;padding:11px 13px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+  .sheet textarea{font-size:14px;min-height:70px;resize:vertical}
+  .sheet .actions{display:flex;gap:10px;margin-top:20px}
+  .sheet .ok{padding:24px 4px;text-align:center}
+  .sheet .ok .chk{font-size:34px;color:var(--brass)}
+  .sheet .ok h3{margin-top:8px}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 60px}
+  footer p{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);line-height:1.7}
+
+  @media (max-width:820px){ .hero{grid-template-columns:1fr} .hero-mark{display:none} }
+  @media (max-width:720px){
+    nav.top{order:3;width:100%;margin-left:0}
+    .bar .cta{margin-left:auto}
+    .mods{grid-template-columns:1fr}
+    .sig{grid-template-columns:80px 1fr;grid-template-areas:"type h" "type m" ". d";gap:3px 12px}
+    .sig .type{grid-area:type;align-self:start}.sig .h{grid-area:h}.sig .m{grid-area:m}.sig .d{grid-area:d}
+    .ladder{gap:4px}.rung .rl{font-size:9px}.rung .rc{font-size:16px}
+    .fcard{grid-template-columns:5px 1fr}
+    .fcard .side{grid-column:1/-1;flex-direction:row;gap:8px;border-left:none;border-top:1px solid var(--line-soft);padding:9px 18px;align-items:center}
+    .fcard .szl{margin-top:0}.fcard .fam{margin-left:0;width:100%}
+  }
+  button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,.rung:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="brand" aria-label="IXARM">
+      <svg viewBox="0 0 40 40" role="img" aria-hidden="true"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="6.5" stroke-linecap="round"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="6.5" stroke-linecap="round"/></svg>
+      <span class="wm">IXARM</span>
+    </span>
+    <span class="badge-demo">Prototype v1</span>
+    <nav class="top" id="nav">
+      <button data-view="accueil" aria-current="true">Accueil</button>
+      <button data-view="intel">Cartographie</button>
+      <button data-view="fin">Financements</button>
+      <button data-view="prix">Offres</button>
+    </nav>
+    <span class="cta"><button class="btn brass" onclick="openModal()">Demander un accès</button></span>
+  </div>
+</div>
+
+<section class="view on" id="v-accueil">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Financements · Aides publiques · Cartographie</span>
+        <h1>La plateforme des PME de la défense.</h1>
+        <p class="lede">Le capital et les aides publiques existent — mais l'écosystème est illisible. IXARM est <b>la couche qui vous oriente</b> : le bon guichet, la bonne aide, la bonne porte, au bon moment.</p>
+        <div class="hero-cta">
+          <button class="btn" onclick="go('fin')">Trouver mon financement</button>
+          <button class="btn ghost" onclick="go('intel')">Explorer la cartographie</button>
+        </div>
+      </div>
+      <div class="hero-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="5" stroke-linecap="round"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="trust">Conçu par un officier de réserve (Chef de Bataillon), auditeur IHEDN — <b>la crédibilité défense qui ouvre les portes, l'IA qui produit à l'échelle d'un cabinet.</b></div>
+    </div>
+
+    <div class="strip">
+      <div class="stat"><div class="fig">8,7 Md$</div><div class="cap">Levés par les startups défense EU 2025 · +55 %</div></div>
+      <div class="stat"><div class="fig">940+</div><div class="cap">Investisseurs actifs · ×2,6 en 5 ans</div></div>
+      <div class="stat"><div class="fig">~65</div><div class="cap">Financeurs &amp; aides cartographiés</div></div>
+      <div class="stat"><div class="fig">395</div><div class="cap">Entreprises de la BITD référencées</div></div>
+    </div>
+
+    <div class="mods">
+      <div class="mod" onclick="go('fin')">
+        <div class="k">Module 1</div>
+        <h3>Financements &amp; aides</h3>
+        <p>Le navigateur : votre stade, votre domaine, et les bons guichets — subventions, VC dédiés, capital souverain. Plus le diagnostic d'éligibilité aux aides publiques.</p>
+        <span class="go">Ouvrir le module →</span>
+      </div>
+      <div class="mod" onclick="go('intel')">
+        <div class="k">Module 2</div>
+        <h3>Cartographie &amp; veille</h3>
+        <p>La carte vivante de l'écosystème — acteurs, financeurs, BITD — et le fil des signaux de marché : contrats, levées, appels d'offres.</p>
+        <span class="go">Ouvrir le module →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="v-intel">
+  <div class="wrap">
+    <span class="eyebrow">Module 2</span>
+    <h2 class="sec-t">Cartographie &amp; veille</h2>
+    <p class="sec-s">Tout ce qui bouge dans la défense/dual-use européenne, cartographié et analysé. <span class="mono" style="color:var(--ink-faint)">Données d'exemple pour le prototype.</span></p>
+
+    <div class="modblk">
+      <div class="modblk-h"><h3>Fil de signaux</h3><span class="pill free">Aperçu gratuit</span><span class="r">temps réel en production</span></div>
+      <div class="feed" id="feed"></div>
+      <div class="lockwrap">
+        <div class="feed" id="feedlock"></div>
+        <div class="lockover">
+          <span class="pill prem">Premium</span>
+          <div class="lt">Les signaux à forte valeur sont réservés</div>
+          <div class="ls">Analyses de consolidation, cibles pré-levée, décryptage d'appels d'offres — débloqués avec l'abonnement.</div>
+          <button class="btn brass" onclick="openModal()">Débloquer l'accès complet</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modblk">
+      <div class="modblk-h"><h3>Cartes vivantes</h3><span class="pill free">Public</span></div>
+      <div class="maps">
+        <div class="mapc"><h4>Carte C-UAS Europe</h4><p>~30 acteurs anti-drones par couche capacitaire, avec les signaux de marché.</p><a href="https://claude.ai/code/artifact/e2474db2-5a66-4a35-943c-653824e37533" target="_blank" rel="noopener">Ouvrir la carte →</a></div>
+        <div class="mapc"><h4>Carte des financeurs</h4><p>~65 fonds défense/dual-use par type et stade, avec le guide « quelle porte ».</p><a href="https://claude.ai/code/artifact/a72f4d86-d118-43ba-8b7b-edfed26c6e9e" target="_blank" rel="noopener">Ouvrir la carte →</a></div>
+        <div class="mapc"><h4>Annuaire BITD</h4><p>~395 entreprises de la base industrielle française, filtrables et référencées.</p><a href="https://deftechfrance.fr/annuaire.html" target="_blank" rel="noopener">Ouvrir l'annuaire →</a></div>
+      </div>
+    </div>
+
+    <div class="modblk">
+      <div class="modblk-h"><h3>Base entreprises BITD</h3><span class="pill free">Aperçu</span><span class="r" id="bitdcount"></span></div>
+      <input class="search" id="bitdsearch" placeholder="Rechercher une entreprise, un segment, une région…">
+      <div class="tbl-wrap"><div class="scroll"><table>
+        <thead><tr><th>Entreprise</th><th>Région</th><th>Segment</th><th>Signal</th></tr></thead>
+        <tbody id="bitdbody"></tbody>
+      </table></div></div>
+    </div>
+
+    <div class="modblk">
+      <div class="modblk-h"><h3>Notes d'analyse à la demande</h3><span class="pill prem">Crédits</span></div>
+      <div class="notec">
+        <div class="txt"><h4>Une note niveau analyste senior, en 48 h</h4><p>Diligence d'une PME cible, décryptage d'un segment, revue d'un appel d'offres. Produite par notre moteur, validée par l'expertise défense.</p></div>
+        <button class="btn" onclick="openModal()">Commander une note</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="v-fin">
+  <div class="wrap">
+    <span class="eyebrow">Module 1</span>
+    <h2 class="sec-t">Financements &amp; aides publiques</h2>
+    <p class="sec-s">Le bon guichet, au bon stade. Un diagnostic express des aides publiques, puis le navigateur complet sur ~50 financeurs.</p>
+
+    <div class="diag">
+      <div class="ctrl-label">Diagnostic express d'éligibilité aux aides</div>
+      <div class="row">
+        <div class="fld"><label>Nature du projet</label><select id="dg-nature"><option value="rd">R&amp;D / techno amont</option><option value="proto">Prototype / maturation</option><option value="indus">Industrialisation / production</option><option value="scale">Croissance / international</option></select></div>
+        <div class="fld"><label>Profil</label><select id="dg-profil"><option value="startup">Startup / deeptech</option><option value="pme">PME BITD établie</option></select></div>
+        <div class="fld"><label>Nationalité</label><select id="dg-nat"><option value="fr">France</option><option value="eu">Autre UE</option></select></div>
+        <button class="btn" onclick="runDiag()">Diagnostiquer</button>
+      </div>
+      <div class="out" id="dg-out"></div>
+    </div>
+
+    <div class="navpanel">
+      <div class="ctrl">
+        <div class="ctrl-label">Stade de maturité</div>
+        <div class="seg" id="stage" role="group" aria-label="Stade">
+          <button data-v="preseed">Idée / pré-amorçage</button>
+          <button data-v="seed" aria-pressed="true">Amorçage</button>
+          <button data-v="seriesA">Série A</button>
+          <button data-v="growth">Croissance</button>
+          <button data-v="late">Scale / Late</button>
+        </div>
+      </div>
+      <div class="ctrl">
+        <div class="ctrl-label">Domaine technologique</div>
+        <div class="seg dom" id="dom" role="group" aria-label="Domaine">
+          <button data-v="tous">Tous</button>
+          <button data-v="ia" aria-pressed="true">IA &amp; autonomie</button>
+          <button data-v="drones">Drones &amp; C-UAS</button>
+          <button data-v="spatial">Spatial</button>
+          <button data-v="cyber">Cyber</button>
+          <button data-v="maritime">Maritime</button>
+          <button data-v="hardware">Hardware &amp; industriel</button>
+        </div>
+      </div>
+      <div class="row2">
+        <label class="toggle"><input type="checkbox" id="bitd"> Profil <b>PME BITD critique</b></label>
+        <label class="toggle"><input type="checkbox" id="us"> Inclure les <b>fonds US</b> en Europe</label>
+      </div>
+      <div class="ladder" id="ladder"></div>
+    </div>
+
+    <div class="sumbar"><h3>Portes correspondantes</h3><span class="cnt" id="sumc"></span></div>
+    <div id="navresults"></div>
+  </div>
+</section>
+
+<section class="view" id="v-prix">
+  <div class="wrap">
+    <span class="eyebrow">Offres</span>
+    <h2 class="sec-t">Un accès pour chaque acteur</h2>
+    <p class="sec-s">Le gratuit attire, l'abonnement fait tourner, la mise en relation fait décoller. Tarifs indicatifs — à caler.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tn">Gratuit</div>
+        <div class="price">0 €</div>
+        <div class="who">Découvrir l'écosystème et se faire une idée.</div>
+        <ul><li>Veille publique</li><li>Cartes publiques (C-UAS, financeurs)</li><li>Navigateur de financement <b>limité</b></li></ul>
+        <button class="btn ghost" onclick="openModal()">Commencer</button>
+      </div>
+      <div class="tier">
+        <div class="tn">PME</div>
+        <div class="price">à partir de 149 €<small>/mois</small></div>
+        <div class="who">Les PME de défense qui cherchent capital et marchés.</div>
+        <ul><li>Veille personnalisée + alertes</li><li>Navigateur &amp; diagnostic complets</li><li>Accès annuaire BITD</li><li>2 notes / trimestre</li></ul>
+        <button class="btn" onclick="openModal()">Choisir PME</button>
+      </div>
+      <div class="tier feature">
+        <div class="tn">Cabinet / Consultant</div>
+        <div class="price">à partir de 590 €<small>/mois</small></div>
+        <div class="who">Les cabinets qui refacturent l'intelligence à leurs clients.</div>
+        <ul><li>Tout PME, multi-sièges</li><li><b>Livrables white-label</b></li><li>Accès data &amp; API</li><li>Notes prioritaires</li></ul>
+        <button class="btn brass" onclick="openModal()">Choisir Cabinet</button>
+      </div>
+      <div class="tier">
+        <div class="tn">Fonds / Prime</div>
+        <div class="price">Sur devis</div>
+        <div class="who">Sourcing et due diligence de deal-flow défense.</div>
+        <ul><li>Sourcing &amp; scoring de PME</li><li>Due diligence à la demande</li><li>Cartes de segment sur mesure</li><li>Notes illimitées</li></ul>
+        <button class="btn ghost" onclick="openModal()">Nous parler</button>
+      </div>
+    </div>
+    <p class="pricenote">+ Mise en relation (PME ↔ financeurs, PME ↔ primes) facturée au success fee — hors abonnement.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><p>IXARM — prototype v1, données d'exemple. Ni conseil en investissement, ni garantie d'éligibilité. Sources ouvertes 2026 (NATO Innovation Fund/Dealroom, EIF, Vestbee, BCG). Le vrai produit — authentification, paiement, données live — se déploie sur le stack de production.</p></div></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Demander un accès">
+  <div class="sheet">
+    <div id="form1">
+      <h3>Demander un accès</h3>
+      <p>Prototype en démonstration. Laissez vos coordonnées : on vous ouvre un accès et on cale le bon niveau.</p>
+      <label for="m-email">E-mail professionnel</label>
+      <input id="m-email" type="email" placeholder="prenom@organisation.fr">
+      <label for="m-profil">Vous êtes</label>
+      <select id="m-profil"><option>PME / acteur de défense</option><option>Consultant / cabinet</option><option>Fonds / investisseur</option><option>Prime / grand groupe</option><option>Institution</option><option>Autre</option></select>
+      <label for="m-msg">Votre besoin (optionnel)</label>
+      <textarea id="m-msg" placeholder="Ce que vous cherchez…"></textarea>
+      <div class="actions">
+        <button class="btn ghost" onclick="closeModal()" style="flex:1">Annuler</button>
+        <button class="btn brass" onclick="submitLead()" style="flex:2">Envoyer</button>
+      </div>
+    </div>
+    <div id="form2" class="ok" style="display:none">
+      <div class="chk">✓</div>
+      <h3>C'est noté</h3>
+      <p>Merci — on revient vers vous très vite. <span class="mono" style="font-size:12px;color:var(--ink-faint)">(Prototype : enregistré localement, pas d'envoi réel.)</span></p>
+      <button class="btn" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+function go(v){showView(v);window.scrollTo({top:0,behavior:"smooth"});}
+function showView(v){
+  var views=document.querySelectorAll(".view");for(var i=0;i<views.length;i++)views[i].classList.toggle("on",views[i].id==="v-"+v);
+  var b=document.querySelectorAll("#nav button");for(var j=0;j<b.length;j++)b[j].setAttribute("aria-current",b[j].getAttribute("data-view")===v);
+}
+document.getElementById("nav").addEventListener("click",function(e){var t=e.target.closest("button");if(t)go(t.getAttribute("data-view"));});
+
+function openModal(){document.getElementById("modal").classList.add("on");document.getElementById("form1").style.display="";document.getElementById("form2").style.display="none";}
+function closeModal(){document.getElementById("modal").classList.remove("on");}
+document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
+function submitLead(){
+  var em=document.getElementById("m-email").value.trim();
+  if(!em||em.indexOf("@")<0){document.getElementById("m-email").focus();document.getElementById("m-email").style.borderColor="var(--gap)";return;}
+  var lead={email:em,profil:document.getElementById("m-profil").value,msg:document.getElementById("m-msg").value,ts:new Date().toISOString()};
+  try{var k="ixarm_leads";var arr=JSON.parse(localStorage.getItem(k)||"[]");arr.push(lead);localStorage.setItem(k,JSON.stringify(arr));}catch(e){}
+  document.getElementById("form1").style.display="none";document.getElementById("form2").style.display="";
+}
+
+var SIGNALS=[
+  {t:"levee",tl:"Levée",h:"Alta Ares lève 57,5 M$ en Série A",m:"Air-defense IA · FR/UA",d:"juin 2026"},
+  {t:"prog",tl:"Programme",h:"TYTAN × HENSOLDT visent 3 000 intercepteurs/mois",m:"C-UAS · Allemagne",d:"2026"},
+  {t:"contrat",tl:"Contrat",h:"Les Pays-Bas commandent le Hornet B2 de Destinus pour leurs frégates",m:"Intercepteur naval · NL",d:"2026"},
+  {t:"levee",tl:"Levée",h:"Sensofusion boucle 45 M€ et rachète Atol Aviation",m:"Détection RF · Finlande",d:"avr. 2026"},
+  {t:"prog",tl:"Programme",h:"SAFE : 38 Md€ approuvés dans la première vague",m:"Réarmement · UE",d:"févr. 2026"},
+  {t:"ao",tl:"Appel d'offres",h:"AID — brouillage anti-FPV embarqué (exemple)",m:"C-UAS · France",d:"ouvert"}
+];
+var SIGNALS_LOCK=[
+  {t:"contrat",tl:"Analyse",h:"Qui va racheter les 35 plateformes C-UAS européennes",m:"Thèse de consolidation",d:"Premium"},
+  {t:"levee",tl:"Cible",h:"12 PME françaises « effecteur bas-coût » pré-levée",m:"Deal sourcing",d:"Premium"},
+  {t:"reg",tl:"Réglementaire",h:"Double usage : ce que change la révision du règlement UE",m:"Conformité export",d:"Premium"},
+  {t:"prog",tl:"Décryptage",h:"EDF 2026 : lire entre les lignes des appels",m:"Financement",d:"Premium"}
+];
+function sigRow(s){return '<div class="sig"><span class="type t-'+s.t+'">'+s.tl+'</span><div><div class="h">'+s.h+'</div><div class="m">'+s.m+'</div></div><span class="d">'+s.d+'</span></div>';}
+document.getElementById("feed").innerHTML=SIGNALS.map(sigRow).join("");
+document.getElementById("feedlock").innerHTML=SIGNALS_LOCK.map(sigRow).join("");
+
+var BITD=[
+  {n:"Thales",r:"Île-de-France",s:"Systèmes intégrés, C-UAS",g:"Contrat"},
+  {n:"MBDA France",r:"Île-de-France",s:"Effecteurs / missiles",g:"Contrat"},
+  {n:"CerbAir",r:"Île-de-France",s:"Détection drones (RF)",g:"Émergent"},
+  {n:"Novadem",r:"PACA",s:"Micro-drones ISR",g:"Déployé"},
+  {n:"Exavision",r:"Occitanie",s:"Optronique",g:"—"},
+  {n:"Diodon Drone Technology",r:"Nouvelle-Aquitaine",s:"Drones résilients",g:"Levée"},
+  {n:"Unseenlabs",r:"Bretagne",s:"SIGINT spatial",g:"Levée"},
+  {n:"Preligens (Safran.AI)",r:"Île-de-France",s:"IA d'analyse d'images",g:"Acquis"},
+  {n:"Cilas",r:"Nouvelle-Aquitaine",s:"Laser / énergie dirigée",g:"Contrat"},
+  {n:"Delair",r:"Occitanie",s:"Drones longue endurance",g:"Déployé"},
+  {n:"Hologarde",r:"Île-de-France",s:"Détection multi-capteurs",g:"Émergent"},
+  {n:"Photonis (Exosens)",r:"Normandie",s:"Vision nocturne",g:"Coté"}
+];
+function renderBitd(q){
+  q=(q||"").toLowerCase();
+  var rows=BITD.filter(function(e){return !q||(e.n+" "+e.r+" "+e.s).toLowerCase().indexOf(q)>=0;});
+  document.getElementById("bitdbody").innerHTML=rows.map(function(e){return '<tr><td>'+e.n+'</td><td>'+e.r+'</td><td>'+e.s+'</td><td>'+e.g+'</td></tr>';}).join("")||'<tr><td colspan="4" style="text-align:center;padding:20px">Aucun résultat dans l\'aperçu.</td></tr>';
+  document.getElementById("bitdcount").textContent="aperçu · "+rows.length+"/395";
+}
+document.getElementById("bitdsearch").addEventListener("input",function(e){renderBitd(e.target.value);});
+renderBitd("");
+
+function runDiag(){
+  var nat=document.getElementById("dg-nature").value,pf=document.getElementById("dg-profil").value,fr=document.getElementById("dg-nat").value;
+  var recos=[];
+  if(nat==="rd"){recos.push("<b>EDF</b> (subvention R&D coopérative)","<b>EIC Fund</b> (deeptech amont)");if(fr==="fr")recos.push("<b>AID — ASTRID/RAPID</b>");}
+  else if(nat==="proto"){recos.push("<b>AID — RAPID</b> (dual-use)","<b>NATO Innovation Fund</b>");if(fr==="fr")recos.push("<b>Definvest</b>");}
+  else if(nat==="indus"){recos.push("<b>Bpifrance Défense</b>","<b>SAFE</b> (via commande)");if(pf==="pme")recos.push("<b>Régions</b> (Occitanie/AURA/PACA)");}
+  else{recos.push("<b>Fonds Innovation Défense</b>","<b>Tikehau Aéro &amp; Défense</b>","<b>E2D</b> / growth");}
+  if(pf==="pme")recos.push("<b>SAFE</b> &amp; commande publique (BITD critique)");
+  var stageHint=nat==="rd"?"preseed":nat==="proto"?"seed":nat==="indus"?"growth":"late";
+  document.getElementById("dg-out").innerHTML="Portes prioritaires : "+recos.join(" · ")+".<br><span style='font-size:13px;color:var(--ink-soft)'>→ On a présélectionné le stade correspondant dans le navigateur ci-dessous.</span>";
+  document.getElementById("dg-out").classList.add("on");
+  setStage(stageHint);
+}
+
+var FUNDS=[
+  {n:"European Defence Fund (EDF)",cc:"UE",f:"public",sz:"~8 Md€",szl:"grant",st:["preseed","seed","seriesA","growth"],seg:["ia","drones","spatial","cyber","maritime","hardware","deeptech"],bitd:true,why:"Subvention R&D : le <b>label</b> qui dé-risque avant le privé."},
+  {n:"European Innovation Council Fund",cc:"UE",f:"public",sz:"—",szl:"blended",st:["preseed","seed"],seg:["ia","hardware","deeptech"],why:"Blended finance deeptech au tout premier stade."},
+  {n:"NATO Innovation Fund",cc:"OTAN",f:"public",sz:"1 Md€",szl:"AUM",st:["seed","seriesA","growth"],seg:["ia","drones","spatial","cyber","maritime","deeptech"],why:"<b>Le fonds défense de référence</b>, fort signal."},
+  {n:"EIF — Defence Equity Facility",cc:"UE",f:"public",sz:"175 M€+",szl:"FoF",st:["seed","seriesA","growth","late"],seg:["deeptech","ia"],why:"Fonds de fonds : à viser via ses VC financés."},
+  {n:"Banque européenne d'investissement",cc:"UE",f:"public",sz:"—",szl:"dette",st:["growth","late"],seg:["deeptech","hardware"],bitd:true,why:"Dette et gros tickets late-stage."},
+  {n:"SAFE",cc:"UE",f:"public",sz:"150 Md€",szl:"prêts",st:["growth","late"],seg:["hardware","maritime","drones"],bitd:true,why:"Prêts souverains à la production : via la <b>commande</b>."},
+  {n:"Bpifrance — Definvest",cc:"FR",f:"public",sz:"100 M€",szl:"0,5–10M€",st:["seed","seriesA","growth"],seg:["drones","hardware","deeptech","ia"],bitd:true,why:"Co-investit dans les <b>PME critiques BITD</b>."},
+  {n:"Fonds Innovation Défense",cc:"FR",f:"public",sz:"300 M€",szl:"AUM",st:["seriesA","growth"],seg:["ia","spatial","deeptech"],why:"Deeptech défense (Pasqal, Quandela)."},
+  {n:"Bpifrance Défense",cc:"FR",f:"public",sz:"450 M€",szl:"AUM",st:["seed","seriesA","growth","late"],seg:["deeptech","ia","hardware"],bitd:true,why:"Capital souverain multi-stade."},
+  {n:"French Tech Souveraineté",cc:"FR",f:"public",sz:"—",szl:"growth",st:["growth","late"],seg:["deeptech","ia"],why:"Tickets croissance, souveraineté."},
+  {n:"SmartCap — Estonian Defence Fund",cc:"EE",f:"public",sz:"100 M€",szl:"AUM",st:["seed","seriesA"],seg:["drones","ia","cyber"],why:"Dédié défense ; porte d'entrée balte."},
+  {n:"BGK",cc:"PL",f:"public",sz:"1,1 Md PLN",szl:"souverain",st:["growth","late"],seg:["drones","hardware","deeptech"],bitd:true,why:"Souverain polonais dual-use."},
+  {n:"NSSIF",cc:"UK",f:"public",sz:"—",szl:"gov",st:["seriesA","growth"],seg:["ia","cyber","deeptech"],why:"National Security Strategic Investment Fund."},
+  {n:"Régions — Occitanie / AURA / PACA",cc:"FR",f:"public",sz:"450 M€",szl:"cumulé",st:["seed","seriesA","growth"],seg:["hardware","drones","deeptech"],bitd:true,why:"Cofinancement à ancrage régional."},
+  {n:"Expeditions",cc:"EU",f:"dedie",sz:"197 M€",szl:"Fund II",st:["seed","seriesA"],seg:["drones","ia","maritime","deeptech"],why:"<b>VC défense pur</b>, adossé à BAE."},
+  {n:"E2D (AVP × Earlybird)",cc:"DE",f:"dedie",sz:"500 M€",szl:"growth",st:["growth","late"],seg:["ia","maritime","drones","deeptech"],why:"Growth : aéro, maritime, autonomie."},
+  {n:"European Defence & Security Tech Fund",cc:"NL",f:"dedie",sz:"180 M€",szl:"AUM",st:["seed","seriesA"],seg:["drones","cyber","ia","deeptech"],why:"Amorçage défense marchés OTAN."},
+  {n:"KOMPAS (Fund II)",cc:"DK",f:"dedie",sz:"160 M€",szl:"AUM",st:["seed","seriesA"],seg:["ia","hardware","cyber"],why:"IA industrielle, robotique, cyber."},
+  {n:"Join Capital (Fund III)",cc:"EU",f:"dedie",sz:"~50 M€",szl:"EIF anchor",st:["seed","seriesA"],seg:["deeptech","spatial","ia"],why:"Deeptech défense/spatial, EIF."},
+  {n:"Alpine Space Ventures",cc:"DE",f:"dedie",sz:"—",szl:"space",st:["seed","seriesA","growth"],seg:["spatial","deeptech"],why:"Spatial & défense."},
+  {n:"Balnord",cc:"PL",f:"dedie",sz:"24 M€",szl:"AUM",st:["preseed","seed"],seg:["drones","deeptech","hardware"],why:"Frontier & dual-use CEE."},
+  {n:"Norrsken Launcher (II)",cc:"SE",f:"dedie",sz:"80 M€",szl:"AUM",st:["preseed","seed"],seg:["deeptech","ia"],why:"Deeptech breakthroughs."},
+  {n:"Front Ventures (III)",cc:"SE",f:"dedie",sz:"—",szl:"defense",st:["preseed","seed"],seg:["drones","cyber","ia"],why:"Drones, comms, software défense."},
+  {n:"D3",cc:"UA",f:"dedie",sz:"—",szl:"defense",st:["preseed","seed"],seg:["drones","ia"],why:"Validé au combat (Ukraine)."},
+  {n:"201 Ventures",cc:"EU",f:"dedie",sz:"—",szl:"seed",st:["preseed","seed"],seg:["deeptech","ia"],why:"Spécialiste deeptech/défense émergent."},
+  {n:"Frontier Vectors",cc:"EU",f:"dedie",sz:"—",szl:"seed",st:["seed"],seg:["deeptech","drones"],why:"Dual-use émergent."},
+  {n:"Twin Track Ventures",cc:"EU",f:"dedie",sz:"—",szl:"seed",st:["seed"],seg:["deeptech","ia"],why:"Défense/dual-use émergent."},
+  {n:"Lakestar",cc:"CH",f:"deeptech",sz:"—",szl:"venture",st:["seriesA","growth"],seg:["ia","deeptech"],why:"Gros bras deeptech (Helsing)."},
+  {n:"Project A",cc:"DE",f:"deeptech",sz:"—",szl:"venture",st:["seed","seriesA"],seg:["deeptech","ia"],why:"Deeptech berlinois, dual-use."},
+  {n:"Cavalry Ventures",cc:"DE",f:"deeptech",sz:"—",szl:"seed",st:["preseed","seed"],seg:["deeptech","ia"],why:"Amorçage deeptech."},
+  {n:"Vsquared Ventures",cc:"DE",f:"deeptech",sz:"—",szl:"venture",st:["seed","seriesA"],seg:["deeptech","spatial","ia"],why:"Deeptech & défense."},
+  {n:"EQT Ventures",cc:"SE",f:"deeptech",sz:"—",szl:"venture",st:["seriesA","growth"],seg:["deeptech","ia"],why:"Venture/growth pan-EU."},
+  {n:"Molten Ventures",cc:"UK",f:"deeptech",sz:"—",szl:"growth",st:["growth","late"],seg:["deeptech"],why:"Growth coté, deeptech."},
+  {n:"IQ Capital",cc:"UK",f:"deeptech",sz:"—",szl:"venture",st:["seed","seriesA"],seg:["deeptech","ia"],why:"Deeptech UK."},
+  {n:"Seedcamp",cc:"UK",f:"deeptech",sz:"—",szl:"seed",st:["preseed","seed"],seg:["deeptech"],why:"Amorçage pan-EU."},
+  {n:"Air Street Capital",cc:"UK",f:"deeptech",sz:"—",szl:"seed",st:["preseed","seed"],seg:["ia"],why:"Spécialiste IA appliquée."},
+  {n:"Prima Materia",cc:"SE",f:"deeptech",sz:"—",szl:"growth",st:["growth"],seg:["ia","deeptech"],why:"Véhicule de D. Ek (Helsing)."},
+  {n:"OTB Ventures",cc:"PL",f:"deeptech",sz:"—",szl:"growth",st:["growth"],seg:["spatial","deeptech"],why:"Deeptech, spatial, dual-use."},
+  {n:"Plural",cc:"EU",f:"deeptech",sz:"—",szl:"venture",st:["seed","seriesA"],seg:["deeptech","ia"],why:"Fonds d'opérateurs, deeptech."},
+  {n:"HCVC (Hardware Club)",cc:"FR",f:"deeptech",sz:"—",szl:"seed",st:["preseed","seed"],seg:["hardware","deeptech"],why:"Spécialiste hardware, base FR."},
+  {n:"In-Q-Tel",cc:"US",f:"us",sz:"—",szl:"strat",st:["seed","seriesA","growth"],seg:["ia","cyber","deeptech"],why:"Renseignement US."},
+  {n:"Shield Capital",cc:"US",f:"us",sz:"—",szl:"venture",st:["seed","seriesA"],seg:["ia","cyber","drones"],why:"VC défense/dual-use US."},
+  {n:"8VC",cc:"US",f:"us",sz:"—",szl:"venture",st:["seriesA","growth"],seg:["deeptech","ia"],why:"Deeptech/défense transatlantique."},
+  {n:"General Catalyst",cc:"US",f:"us",sz:"—",szl:"growth",st:["growth","late"],seg:["deeptech","ia"],why:"Growth, poussée défense EU."},
+  {n:"Accel · Lightspeed",cc:"US",f:"us",sz:"—",szl:"venture",st:["seriesA","growth"],seg:["deeptech","ia","cyber"],why:"Généralistes, co-invest EU."},
+  {n:"Dassault Aviation",cc:"FR",f:"corp",sz:"—",szl:"strat",st:["growth","late"],seg:["drones","maritime","hardware"],bitd:true,why:"Prime stratégique."},
+  {n:"Safran Corporate Ventures",cc:"FR",f:"corp",sz:"—",szl:"CVC",st:["seriesA","growth"],seg:["hardware","spatial","ia"],bitd:true,why:"CVC d'un prime aéro."},
+  {n:"Airbus Ventures",cc:"FR",f:"corp",sz:"—",szl:"CVC",st:["seed","seriesA","growth"],seg:["spatial","ia","deeptech"],why:"CVC actif seed→growth."},
+  {n:"Tikehau — Aéro & Défense",cc:"FR",f:"corp",sz:"—",szl:"PE",st:["growth","late"],seg:["deeptech","hardware"],bitd:true,why:"Capital-dev dédié défense."},
+  {n:"Audacia — Straton",cc:"FR",f:"corp",sz:"150 M€",szl:"AUM",st:["seriesA","growth"],seg:["deeptech","ia"],why:"Fonds privé dual-use."},
+  {n:"Eurazeo · Weinberg · Amundi",cc:"FR",f:"corp",sz:"—",szl:"PE/inst",st:["growth","late"],seg:["deeptech","hardware"],bitd:true,why:"Institutionnels FR, dual-use."},
+  {n:"Armira",cc:"DE",f:"corp",sz:"—",szl:"growth",st:["growth"],seg:["deeptech","hardware"],bitd:true,why:"Capital familial deeptech défense."},
+  {n:"APG",cc:"NL",f:"corp",sz:"601 Md€",szl:"AUM",st:["late"],seg:["deeptech","hardware"],bitd:true,why:"Fonds de pension, pivot défense."}
+];
+var STAGES=[["preseed","Idée /<br>pré-amorçage"],["seed","Amorçage"],["seriesA","Série A"],["growth","Croissance"],["late","Scale /<br>Late"]];
+var FAMLABEL={public:"Public / Souverain",dedie:"VC dédié défense",deeptech:"VC deeptech",us:"Crossover US",corp:"Corporate / PE"};
+var FAMORDER={public:0,dedie:1,corp:2,deeptech:3,us:4};
+var st8={stage:"seed",dom:"ia",bitd:false,us:false};
+function nscore(fd,stage){
+  if(fd.st.indexOf(stage)<0)return null;
+  if(!st8.us&&fd.f==="us")return null;
+  var s=3;
+  if(st8.dom!=="tous"){if(fd.seg.indexOf(st8.dom)>=0)s+=3;else if(fd.seg.indexOf("deeptech")>=0)s+=0.6;else return null;}
+  if(st8.bitd){if(fd.bitd||fd.f==="public"||fd.f==="corp")s+=2;else s-=1;}
+  s+=(4-FAMORDER[fd.f])*0.15;return s;
+}
+function nmatches(stage){var o=[];for(var i=0;i<FUNDS.length;i++){var sc=nscore(FUNDS[i],stage);if(sc!==null)o.push({fd:FUNDS[i],sc:sc});}
+  o.sort(function(a,b){return b.sc-a.sc||FAMORDER[a.fd.f]-FAMORDER[b.fd.f]||a.fd.n.localeCompare(b.fd.n);});return o;}
+function nstageBadges(fd){var h="";for(var i=0;i<STAGES.length;i++){var k=STAGES[i][0];var lbl=k==="preseed"?"pré-am.":k==="seriesA"?"série A":k==="seed"?"amorç.":k==="growth"?"crois.":"late";if(fd.st.indexOf(k)>=0)h+='<span class="stg'+(k===st8.stage?" on":"")+'">'+lbl+'</span>';}return h;}
+function nlabelStage(k){for(var i=0;i<STAGES.length;i++)if(STAGES[i][0]===k)return STAGES[i][1].replace(/<br>/g," ");return k;}
+function nlabelDom(k){var m={ia:"IA & autonomie",drones:"Drones & C-UAS",spatial:"Spatial",cyber:"Cyber",maritime:"Maritime",hardware:"Hardware & industriel"};return m[k]||k;}
+function nrender(){
+  var lad=document.getElementById("ladder");lad.innerHTML="";
+  STAGES.forEach(function(p){var c=nmatches(p[0]).length;var d=document.createElement("button");d.className="rung";d.setAttribute("data-on",p[0]===st8.stage);
+    d.innerHTML='<span class="rl">'+p[1]+'</span><span class="rc">'+c+'</span>';d.onclick=function(){setStage(p[0]);};lad.appendChild(d);});
+  var res=nmatches(st8.stage);
+  document.getElementById("sumc").textContent=res.length+" porte"+(res.length>1?"s":"")+" · "+nlabelStage(st8.stage)+(st8.dom!=="tous"?" · "+nlabelDom(st8.dom):"");
+  var box=document.getElementById("navresults");box.innerHTML="";
+  res.forEach(function(o){var fd=o.fd;var c=document.createElement("div");c.className="fcard f-"+fd.f;
+    c.innerHTML='<div class="stripe"></div><div class="bd"><div class="top"><span class="nm">'+fd.n+'</span><span class="cc">'+fd.cc+'</span><span class="fam">'+FAMLABEL[fd.f]+'</span></div><div class="why">'+fd.why+'</div><div class="stages">'+nstageBadges(fd)+'</div></div><div class="side"><span class="sz">'+fd.sz+'</span><span class="szl">'+fd.szl+'</span></div>';
+    box.appendChild(c);});
+}
+function nsync(id,v){var g=document.getElementById(id);var b=g.querySelectorAll("button");for(var i=0;i<b.length;i++)b[i].setAttribute("aria-pressed",b[i].getAttribute("data-v")===v);}
+function setStage(v){st8.stage=v;nsync("stage",v);nrender();}
+function nwire(id,key){document.getElementById(id).addEventListener("click",function(e){var t=e.target.closest("button");if(!t)return;st8[key]=t.getAttribute("data-v");nsync(id,st8[key]);nrender();});}
+nwire("stage","stage");nwire("dom","dom");
+document.getElementById("bitd").addEventListener("change",function(e){st8.bitd=e.target.checked;nrender();});
+document.getElementById("us").addEventListener("change",function(e){st8.us=e.target.checked;nrender();});
+nrender();
+</script>
+</body>
+</html>
