@@ -243,6 +243,7 @@
 
   @media (max-width:820px){ .hero{grid-template-columns:1fr} .hero-mark{display:none} }
   @media (max-width:720px){
+    .bar-in{flex-wrap:wrap}
     nav.top{order:3;width:100%;margin-left:0}
     .bar .cta{margin-left:auto}
     .mods{grid-template-columns:1fr}
@@ -265,15 +266,14 @@
       <svg viewBox="0 0 40 40" role="img" aria-hidden="true"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="6.5" stroke-linecap="round"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="6.5" stroke-linecap="round"/></svg>
       <span class="wm">IXARM</span>
     </span>
-    <span class="badge-demo">Prototype v1</span>
     <nav class="top" id="nav">
       <button data-view="accueil" aria-current="true">Accueil</button>
       <button data-view="intel">Cartographie</button>
       <button data-view="fin">Financements</button>
-      <button data-view="prix">Offres</button>
+      <button data-view="prix">Radar · Offres</button>
       <a href="app.html" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--brass);text-decoration:none;padding:7px 12px;border-radius:6px">Espace membre →</a>
     </nav>
-    <span class="cta"><button class="btn brass" onclick="openModal()">Demander un accès</button></span>
+    <span class="cta"><button class="btn brass" onclick="go('prix')">IXARM Radar</button></span>
   </div>
 </div>
 
@@ -287,6 +287,7 @@
         <div class="hero-cta">
           <button class="btn" onclick="go('fin')">Trouver mon financement</button>
           <button class="btn ghost" onclick="go('intel')">Explorer la cartographie</button>
+          <button class="btn brass" onclick="go('prix')">Appels d'offres défense : IXARM Radar →</button>
         </div>
       </div>
       <div class="hero-mark" aria-hidden="true">
@@ -422,33 +423,32 @@
 
 <section class="view" id="v-prix">
   <div class="wrap">
-    <span class="eyebrow">Offres</span>
-    <h2 class="sec-t">Un accès pour chaque acteur</h2>
-    <p class="sec-s">100 % en ligne, self-service, sans engagement — résiliable en un clic. Le gratuit attire, l'abonnement fait tourner.</p>
+    <span class="eyebrow">IXARM Radar</span>
+    <h2 class="sec-t">Les appels d'offres défense qui vous concernent, chaque lundi.</h2>
+    <p class="sec-s">Chaque jour, IXARM passe en revue les avis de marchés défense publiés au BOAMP et au Journal officiel de l'UE (TED). Chaque lundi, vous recevez par e-mail uniquement ceux qui correspondent à <b>vos</b> domaines, avec un résumé en français, le lien vers l'avis officiel et une alerte quand l'échéance approche.</p>
     <div class="tiers">
+      <div class="tier feature">
+        <div class="tn">IXARM Radar</div>
+        <div class="price">49 €<small> HT/mois</small></div>
+        <div class="who">Pour les PME, start-up et laboratoires qui répondent, ou veulent répondre, à des marchés de défense.</div>
+        <ul><li><b>Sources</b> : BOAMP (France) et TED (27 pays de l'UE), lues chaque jour</li><li><b>Tri sur votre profil</b> : 15 domaines (drones, cyber, naval…), taille, région, mots-clés</li><li><b>Un e-mail par semaine</b>, jusqu'à 8 avis expliqués : pourquoi pour vous, qui achète, quand répondre</li><li><b>Alerte échéance</b> quand une date limite tombe dans les 10 jours</li><li>Sans engagement, <b>résiliable en un clic</b></li></ul>
+        <button class="btn brass" onclick="subscribe('radar')">S'abonner — 49 € HT/mois</button>
+      </div>
+      <div class="tier">
+        <div class="tn">Exemple réel · semaine du 10/11/2026</div>
+        <div class="who" style="min-height:0">Extrait de l'e-mail reçu par une PME « drones & électronique » :</div>
+        <ul><li><b>Monoculaire d'imagerie thermique de surveillance</b> — ministère de la Défense tchèque · TED</li><li><b>Systèmes de visée diurne, accord-cadre</b> — ministère de la Défense roumain · TED</li><li><b>Produits de navigation</b> — 8e base aérienne de transport, Cracovie · TED</li><li><b>Entretien des wagons militaires</b> — Ministère des Armées, SIMMT · TED</li></ul>
+        <button class="btn ghost" onclick="openModal()">Recevoir un exemple complet</button>
+      </div>
       <div class="tier">
         <div class="tn">Gratuit</div>
         <div class="price">0 €</div>
-        <div class="who">Découvrir l'écosystème et se faire une idée.</div>
-        <ul><li>Veille publique</li><li>Cartes publiques (C-UAS, financeurs)</li><li>Navigateur de financement <b>limité</b></li></ul>
-        <button class="btn ghost" onclick="openModal()">Commencer</button>
-      </div>
-      <div class="tier feature">
-        <div class="tn">IXARM Pro</div>
-        <div class="price">29 €<small>/mois</small></div>
-        <div class="who">Pour les PME &amp; professionnels de la défense.</div>
-        <ul><li>Fil de signaux intégral</li><li>Navigateur &amp; diagnostic complets</li><li>Accès annuaire BITD complet</li><li><b>Digest d'intelligence hebdo</b> par e-mail — <a href="digest.html" target="_blank" rel="noopener">voir l'édition #1</a></li></ul>
-        <button class="btn brass" onclick="subscribe('pro')">S'abonner</button>
-      </div>
-      <div class="tier">
-        <div class="tn">IXARM Cabinet</div>
-        <div class="price">99 €<small>/mois</small></div>
-        <div class="who">Pour les cabinets &amp; fonds qui exploitent la donnée.</div>
-        <ul><li>Tout IXARM Pro</li><li>Support prioritaire</li><li><b>Multi-sièges</b> <span class="mono" style="font-size:11px;color:var(--ink-faint)">bientôt</span></li><li>Data &amp; API, exports white-label <span class="mono" style="font-size:11px;color:var(--ink-faint)">bientôt</span></li></ul>
-        <button class="btn" onclick="subscribe('cabinet')">S'abonner</button>
+        <div class="who">Explorer l'écosystème avant de s'abonner.</div>
+        <ul><li>Cartographie publique (C-UAS, financeurs)</li><li>Navigateur de financement</li><li><b>IXARM Data</b> (base des PME défense, 149 € HT/mois) : <span class="mono" style="font-size:11px;color:var(--ink-faint)">bientôt</span>, liste d'attente ouverte</li></ul>
+        <button class="btn ghost" onclick="openModal()">Rejoindre la liste d'attente</button>
       </div>
     </div>
-    <p class="pricenote">Paiement sécurisé par Stripe · résiliation en un clic depuis votre espace · tarifs indicatifs, ajustables.</p>
+    <p class="pricenote">Paiement sécurisé par Stripe · TVA ajoutée au paiement · résiliation en un clic depuis l'espace de facturation · question : radar@ixarm.fr</p>
   </div>
 </section>
 
@@ -494,7 +494,7 @@ function closeModal(){document.getElementById("modal").classList.remove("on");}
 document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
 /* Liens Stripe Checkout (Payment Links) — remplir avec vos URLs Stripe pour activer le paiement self-service */
-var STRIPE={pro:"",cabinet:""};
+var STRIPE={radar:"https://buy.stripe.com/dRmdR93yZdX05nf2BbbAs04"};
 function subscribe(plan){var u=STRIPE[plan];if(u){window.open(u,"_blank","noopener");}else{openModal();}}
 function submitLead(){
   var em=document.getElementById("m-email").value.trim();
