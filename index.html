@@ -4,33 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>IXARM — La plateforme des PME de la défense</title>
-<meta name="description" content="IXARM — financements, aides publiques et cartographie de l'écosystème pour les PME de la défense.">
+<meta name="description" content="IXARM Radar : chaque lundi, les appels d'offres défense (BOAMP et TED) qui correspondent à votre entreprise. Financements et cartographie de la BITD.">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="IXARM">
-<meta property="og:title" content="IXARM — La plateforme des PME de la défense">
-<meta property="og:description" content="Financements, aides publiques et cartographie de l'écosystème défense & dual-use. Navigateur de financement, veille et digest hebdo.">
-<meta property="og:image" content="https://ixarm.fr/og-image.png">
+<meta property="og:title" content="IXARM — La défense achète. On vous dit quoi.">
+<meta property="og:description" content="IXARM Radar : chaque lundi, les appels d'offres défense (BOAMP et TED) qui correspondent à votre entreprise. Plus les financements et la cartographie de la BITD.">
+<meta property="og:image" content="https://ixarm.fr/og-image.png?v=2">
 <meta property="og:url" content="https://ixarm.fr/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IXARM — La plateforme des PME de la défense">
-<meta name="twitter:description" content="Financements, cartographie et veille défense & dual-use.">
-<meta name="twitter:image" content="https://ixarm.fr/og-image.png">
+<meta name="twitter:title" content="IXARM — La défense achète. On vous dit quoi.">
+<meta name="twitter:description" content="Chaque lundi, les appels d'offres défense qui vous concernent. BOAMP et TED, triés par IA.">
+<meta name="twitter:image" content="https://ixarm.fr/og-image.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    --ground:#F2F4F7; --surface:#F9FAFC; --panel:#FFFFFF;
+    --ground:#F4F4F2; --surface:#FAFAF8; --panel:#FFFFFF;
     --ink:#121821; --ink-soft:#4C5865; --ink-faint:#7E8B99;
     --line:#DBE0E7; --line-soft:#E8ECF1;
     --brass:#1A5FCC; --brass-bg:#E3EDFB;
     --signal:#3C5A73; --signal-bg:#E5ECF2;
     --capture:#1E7A4D; --capture-bg:#DDF0E5;
     --gap:#BE4326; --gap-bg:#F6E5DF;
-    --shadow:0 1px 2px rgba(18,24,33,.05),0 10px 30px rgba(18,24,33,.07);
+    --shadow:none;
   }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --ground:#0A0E13; --surface:#111823; --panel:#161E29;
@@ -56,7 +56,7 @@
   html,body{margin:0}
   img{max-width:100%}
   body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,h4{font-family:"Sora","IBM Plex Sans",sans-serif;text-wrap:balance;line-height:1.12;margin:0;letter-spacing:-.01em}
+  h1,h2,h3,h4{font-family:"Barlow Condensed",sans-serif;text-wrap:balance;line-height:1.12;margin:0;letter-spacing:-.01em}
   .mono{font-family:"IBM Plex Mono",monospace}
   .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
   a{color:inherit}
@@ -65,7 +65,7 @@
   .bar-in{max-width:1080px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:16px}
   .brand{display:inline-flex;align-items:center;gap:10px;white-space:nowrap}
   .brand svg{display:block;width:26px;height:26px}
-  .brand .wm{font-family:"Sora",sans-serif;font-size:20px;font-weight:800;letter-spacing:.06em}
+  .brand .wm{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:800;letter-spacing:.06em}
   .badge-demo{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass);border:1px solid var(--brass);border-radius:4px;padding:1px 6px}
   nav.top{display:flex;gap:2px;margin-left:10px;flex-wrap:wrap}
   nav.top button{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-soft);background:none;border:none;padding:7px 12px;border-radius:6px;cursor:pointer}
@@ -97,7 +97,7 @@
 
   .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:34px 0}
   .stat{background:var(--panel);padding:16px 18px 14px}
-  .stat .fig{font-family:"Sora",sans-serif;font-weight:800;font-size:27px;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+  .stat .fig{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:27px;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
   .stat .cap{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.03em;color:var(--ink-soft);text-transform:uppercase;margin-top:10px;line-height:1.45}
 
   .mods{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
@@ -130,7 +130,7 @@
   .lockwrap{position:relative;margin-top:10px;border:1px dashed var(--brass);border-radius:10px;overflow:hidden}
   .lockwrap .feed{filter:blur(4px);opacity:.5;pointer-events:none;padding:8px}
   .lockover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:color-mix(in srgb,var(--ground) 42%,transparent);text-align:center;padding:20px}
-  .lockover .lt{font-family:"Sora",sans-serif;font-weight:700;font-size:19px}
+  .lockover .lt{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:19px}
   .lockover .ls{font-size:14px;color:var(--ink-soft);max-width:40ch}
 
   .maps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
@@ -184,7 +184,7 @@
   .rung[data-on="true"]{background:var(--brass-bg);border-color:var(--brass)}
   .rung .rl{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-soft);display:block;line-height:1.3}
   .rung[data-on="true"] .rl{color:var(--brass)}
-  .rung .rc{font-family:"Sora",sans-serif;font-weight:800;font-size:19px;margin-top:2px;font-variant-numeric:tabular-nums}
+  .rung .rc{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:19px;margin-top:2px;font-variant-numeric:tabular-nums}
   .navpanel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow)}
   .sumbar{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 0 4px;padding-bottom:9px;border-bottom:1.5px solid var(--ink)}
   .sumbar h3{font-size:19px;font-weight:700}
@@ -199,7 +199,7 @@
   .fcard.f-corp .stripe{background:var(--capture)}
   .fcard .bd{padding:14px 18px}
   .fcard .top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
-  .fcard .nm{font-family:"Sora",sans-serif;font-weight:600;font-size:17px}
+  .fcard .nm{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:17px}
   .fcard .cc{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
   .fcard .fam{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);margin-left:auto}
   .fcard .why{font-size:14.5px;color:var(--ink-soft);margin-top:5px}
@@ -215,7 +215,7 @@
   .tier{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:24px 22px;display:flex;flex-direction:column}
   .tier.feature{border-color:var(--brass);border-width:2px;box-shadow:var(--shadow)}
   .tier .tn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);font-weight:600}
-  .tier .price{font-family:"Sora",sans-serif;font-weight:800;font-size:30px;margin:10px 0 2px;letter-spacing:-.02em}
+  .tier .price{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:30px;margin:10px 0 2px;letter-spacing:-.02em}
   .tier .price small{font-size:14px;font-weight:400;color:var(--ink-faint);font-family:"IBM Plex Mono",monospace}
   .tier .who{font-size:14px;color:var(--ink-soft);margin-bottom:14px;min-height:2.6em}
   .tier ul{list-style:none;margin:0 0 18px;padding:0;flex:1}
@@ -259,12 +259,12 @@
 
   /* ===== Charte 2026 : famille defx.ai / Cercle Monge / SpacePulse ===== */
   :root{--night:#06080B;--night-2:#0D1117;--on-night:#EDF1F5;--on-night-soft:#9AA6B2;--beam:#4D93F0}
-  h1,h2,.sec-t,.tier .price,.stat .fig,.brand .wm,.sheet h3{font-family:"Barlow Condensed","Sora",sans-serif}
+  h1,h2,.sec-t,.tier .price,.stat .fig,.brand .wm,.sheet h3{font-family:"Barlow Condensed",sans-serif}
   h1,.sec-t{text-transform:uppercase;letter-spacing:.005em;font-weight:700;line-height:.98}
-  h3,.mod h3,.modblk-h h3{font-family:"Barlow Condensed","Sora",sans-serif;font-weight:700;letter-spacing:.01em;text-transform:uppercase}
+  h3,.mod h3,.modblk-h h3{font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:.01em;text-transform:uppercase}
   .sec-t{font-size:clamp(30px,4.4vw,46px);margin-bottom:10px}
   .eyebrow{letter-spacing:.24em;font-size:11.5px}
-  .bar{--signal:#9AA6B2;--brass:#4D93F0;background:rgba(6,8,11,.92);border-bottom:1px solid rgba(255,255,255,.08);color:var(--on-night)}
+  .bar{--signal:#EDF1F5;--brass:#4D93F0;background:rgba(6,8,11,.92);border-bottom:1px solid rgba(255,255,255,.08);color:var(--on-night)}
   .brand .wm{font-size:24px;font-weight:700;letter-spacing:.32em;color:var(--on-night)}
   nav.top button,nav.top a{font-family:"Barlow Condensed",sans-serif!important;font-size:14.5px!important;font-weight:600;letter-spacing:.12em;padding:7px 10px!important;text-transform:uppercase;color:var(--on-night-soft)!important;border-radius:0!important}
   nav.top button:hover{background:none;color:var(--on-night)!important}
@@ -306,7 +306,7 @@
 <div class="bar">
   <div class="bar-in">
     <span class="brand" aria-label="IXARM">
-      <svg viewBox="0 0 40 40" role="img" aria-hidden="true"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="6.5" stroke-linecap="round"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="6.5" stroke-linecap="round"/></svg>
+      <svg viewBox="0 0 40 40" role="img" aria-hidden="true"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="6.5" stroke-linecap="square"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="6.5" stroke-linecap="square"/></svg>
       <span class="wm">IXARM</span>
     </span>
     <nav class="top" id="nav">
