@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
     --ground:#F2F4F7;--panel:#FFFFFF;--ink:#121821;--ink-soft:#4C5865;--ink-faint:#7E8B99;
@@ -58,6 +58,20 @@
   .side{margin-top:22px;font-size:14px;color:var(--ink-soft)}
   .side p{margin:6px 0}
   footer{border-top:1px solid var(--line);padding:22px 0;font-size:13px;color:var(--ink-faint)}
+
+  /* Charte 2026 */
+  header{background:#06080B;border-bottom:1px solid rgba(255,255,255,.08)}
+  .logo{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:24px;letter-spacing:.32em;color:#EDF1F5}
+  .logo b{color:#4D93F0}
+  .tag{color:#9AA6B2;letter-spacing:.2em}
+  h1,legend{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.01em}
+  h1{font-size:clamp(36px,7vw,52px);line-height:.98}
+  legend{font-size:19px}
+  .card{border-radius:2px}
+  .chips span{border-radius:0}
+  select,textarea{border-radius:0}
+  button{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:16px;border-radius:0;background:#06080B}
+  footer{background:#06080B;color:#9AA6B2;border-top:none}
 </style>
 </head>
 <body>
@@ -68,7 +82,7 @@
 
 <main><div class="wrap">
   <h1>Réglez votre veille</h1>
-  <p class="lead">Ces critères choisissent les appels d'offres et financements de votre e-mail hebdomadaire. Vous pouvez revenir sur cette page à tout moment depuis votre e-mail de bienvenue.</p>
+  <p class="lead">Ces critères choisissent les appels d'offres de votre e-mail du lundi. Vous pouvez revenir sur cette page à tout moment depuis votre e-mail de bienvenue.</p>
 
   <div class="card" id="nolink" hidden>
     <p style="margin:0">Ce lien n'est pas complet. Ouvrez la page depuis le bouton « Compléter mon profil » de votre e-mail de bienvenue, ou écrivez-nous à <a href="mailto:radar@ixarm.fr">radar@ixarm.fr</a>.</p>
@@ -83,7 +97,7 @@
 
     <fieldset>
       <legend>Votre structure</legend>
-      <p class="hint">Sert à privilégier les marchés et financements à votre taille.</p>
+      <p class="hint">Sert à privilégier les marchés à votre taille.</p>
       <select name="stade" id="stade" required>
         <option value="">Choisir…</option>
         <option>Start-up</option><option>PME</option><option>ETI</option><option>Grand groupe</option>

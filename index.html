@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://ixarm.fr/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
     --ground:#F2F4F7; --surface:#F9FAFC; --panel:#FFFFFF;
@@ -256,6 +256,49 @@
   }
   button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,.rung:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  /* ===== Charte 2026 : famille defx.ai / Cercle Monge / SpacePulse ===== */
+  :root{--night:#06080B;--night-2:#0D1117;--on-night:#EDF1F5;--on-night-soft:#9AA6B2;--beam:#4D93F0}
+  h1,h2,.sec-t,.tier .price,.stat .fig,.brand .wm,.sheet h3{font-family:"Barlow Condensed","Sora",sans-serif}
+  h1,.sec-t{text-transform:uppercase;letter-spacing:.005em;font-weight:700;line-height:.98}
+  h3,.mod h3,.modblk-h h3{font-family:"Barlow Condensed","Sora",sans-serif;font-weight:700;letter-spacing:.01em;text-transform:uppercase}
+  .sec-t{font-size:clamp(30px,4.4vw,46px);margin-bottom:10px}
+  .eyebrow{letter-spacing:.24em;font-size:11.5px}
+  .bar{--signal:#9AA6B2;--brass:#4D93F0;background:rgba(6,8,11,.92);border-bottom:1px solid rgba(255,255,255,.08);color:var(--on-night)}
+  .brand .wm{font-size:24px;font-weight:700;letter-spacing:.32em;color:var(--on-night)}
+  nav.top button,nav.top a{font-family:"Barlow Condensed",sans-serif!important;font-size:14.5px!important;font-weight:600;letter-spacing:.12em;padding:7px 10px!important;text-transform:uppercase;color:var(--on-night-soft)!important;border-radius:0!important}
+  nav.top button:hover{background:none;color:var(--on-night)!important}
+  nav.top button[aria-current="true"]{background:none;color:var(--on-night)!important;box-shadow:inset 0 -2px 0 var(--beam)}
+  .btn{font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border-radius:0;padding:12px 22px}
+  .btn.light{background:#fff;border-color:#fff;color:#06080B}
+  .btn.outline{background:none;border:1.5px solid rgba(255,255,255,.85);color:#fff}
+  .btn.outline:hover{background:#fff;color:#06080B;opacity:1}
+  .bar .btn.brass{background:none;border:1.5px solid #fff;color:#fff;padding:9px 16px}
+  .bar .btn.brass:hover{background:#fff;color:#06080B}
+  .mod,.tier,.sig,.stat,.strip,.sheet,.fcard,.lockwrap{border-radius:2px!important}
+  .tier .price{font-size:40px;font-weight:700}
+  .stat .fig{font-size:34px;font-weight:700}
+  #v-accueil{padding-top:0}
+  .band{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 78% 40%,#0E1A2B 0%,var(--night) 62%);color:var(--on-night);min-height:min(78vh,640px);display:flex;align-items:flex-end}
+  .band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(6,8,11,.65));pointer-events:none}
+  .band-in{position:relative;z-index:2;padding-top:96px;padding-bottom:40px;width:100%}
+  .band .eyebrow{color:var(--beam)}
+  .band h1{font-size:clamp(50px,8vw,96px);margin-top:16px;color:#fff}
+  .band .lede{font-size:clamp(17px,1.9vw,20px);color:var(--on-night-soft);max-width:52ch;margin-top:22px}
+  .band .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+  .band-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:56px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-night-soft)}
+  .radar{position:absolute;right:-140px;top:50%;width:min(760px,95vw);aspect-ratio:1;transform:translateY(-50%);color:var(--beam);z-index:1}
+  .radar svg{width:100%;height:100%}
+  .sweep{position:absolute;inset:3.5%;border-radius:50%;background:conic-gradient(from 0deg,rgba(77,147,240,.34),rgba(77,147,240,0) 70deg,transparent 360deg);animation:sweep 6s linear infinite}
+  .blip{opacity:0;animation:blip 6s ease-out infinite}
+  .b1{animation-delay:.55s}.b2{animation-delay:4.7s}.b3{animation-delay:1.9s}.b4{animation-delay:3.4s}
+  @keyframes sweep{to{transform:rotate(360deg)}}
+  @keyframes blip{0%{opacity:0}4%{opacity:1}40%{opacity:.15}100%{opacity:0}}
+  .trust{border-top:none;padding-top:22px;margin-top:0}
+  footer{background:var(--night);color:var(--on-night-soft);border-top:none}
+  footer p{color:var(--on-night-soft)}
+  @media (max-width:720px){nav.top{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}nav.top button,nav.top a{white-space:nowrap}.radar{right:-45%;top:30%;opacity:.7}.band-in{padding-top:60px}.band-meta{margin-top:36px}}
+  @media (prefers-reduced-motion:reduce){.sweep,.blip{animation:none}.blip{opacity:.6}}
 </style>
 </head>
 <body>
@@ -278,23 +321,36 @@
 </div>
 
 <section class="view on" id="v-accueil">
-  <div class="wrap">
-    <div class="hero">
-      <div>
-        <span class="eyebrow">Financements · Aides publiques · Cartographie</span>
-        <h1>La plateforme des PME de la défense.</h1>
-        <p class="lede">Le capital et les aides publiques existent — mais l'écosystème est illisible. IXARM est <b>la couche qui vous oriente</b> : le bon guichet, la bonne aide, la bonne porte, au bon moment.</p>
-        <div class="hero-cta">
-          <button class="btn" onclick="go('fin')">Trouver mon financement</button>
-          <button class="btn ghost" onclick="go('intel')">Explorer la cartographie</button>
-          <button class="btn brass" onclick="go('prix')">Appels d'offres défense : IXARM Radar →</button>
-        </div>
-      </div>
-      <div class="hero-mark" aria-hidden="true">
-        <svg viewBox="0 0 40 40"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="5" stroke-linecap="round"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="5" stroke-linecap="round"/></svg>
-      </div>
-      <div class="trust">Conçu par un officier de réserve (Chef de Bataillon), auditeur IHEDN — <b>la crédibilité défense qui ouvre les portes, l'IA qui produit à l'échelle d'un cabinet.</b></div>
+  <div class="band">
+    <div class="radar" aria-hidden="true">
+      <svg viewBox="0 0 600 600" fill="none">
+        <g stroke="currentColor" stroke-width="1">
+          <circle cx="300" cy="300" r="290" opacity=".35"/><circle cx="300" cy="300" r="220" opacity=".28"/>
+          <circle cx="300" cy="300" r="150" opacity=".22"/><circle cx="300" cy="300" r="80" opacity=".18"/>
+          <line x1="10" y1="300" x2="590" y2="300" opacity=".2"/><line x1="300" y1="10" x2="300" y2="590" opacity=".2"/>
+          <line x1="95" y1="95" x2="505" y2="505" opacity=".1"/><line x1="505" y1="95" x2="95" y2="505" opacity=".1"/>
+        </g>
+        <g fill="currentColor">
+          <circle class="blip b1" cx="392" cy="188" r="4"/><circle class="blip b2" cx="196" cy="236" r="3"/>
+          <circle class="blip b3" cx="430" cy="372" r="3.5"/><circle class="blip b4" cx="262" cy="452" r="3"/>
+        </g>
+      </svg>
+      <div class="sweep"></div>
     </div>
+    <div class="wrap band-in">
+      <span class="eyebrow">Marchés · Financements · BITD</span>
+      <h1>La défense achète.<br>On vous dit quoi.</h1>
+      <p class="lede">Appels d'offres, aides publiques, financeurs : IXARM lit l'écosystème défense chaque jour et vous indique où se trouve votre prochaine opportunité.</p>
+      <div class="hero-cta">
+        <button class="btn light" onclick="go('prix')">IXARM Radar — 49 € HT/mois</button>
+        <button class="btn outline" onclick="go('fin')">Trouver mon financement</button>
+        <button class="btn outline" onclick="go('intel')">Cartographie</button>
+      </div>
+      <div class="band-meta"><span>BOAMP · TED · lus chaque jour à 06:13</span><span id="utc"></span></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="trust">Conçu par un officier de réserve (Chef de Bataillon), auditeur IHEDN — <b>la crédibilité défense qui ouvre les portes, l'IA qui produit à l'échelle d'un cabinet.</b></div>
 
     <div class="strip">
       <div class="stat"><div class="fig">8,7 Md$</div><div class="cap">Levés par les startups défense EU 2025 · +55 %</div></div>
@@ -482,6 +538,7 @@
 
 <script>
 "use strict";
+(function(){var e=document.getElementById("utc");if(!e)return;function t(){var d=new Date();e.textContent=d.toISOString().slice(11,19)+" UTC";}t();setInterval(t,1000);})();
 function go(v){showView(v);window.scrollTo({top:0,behavior:"smooth"});}
 function showView(v){
   var views=document.querySelectorAll(".view");for(var i=0;i<views.length;i++)views[i].classList.toggle("on",views[i].id==="v-"+v);
