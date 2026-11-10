@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IXARM · Mon profil Radar</title>
+<meta name="description" content="Réglez votre veille IXARM Radar : domaines, stade, région et mots-clés.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F2F4F7;--panel:#FFFFFF;--ink:#121821;--ink-soft:#4C5865;--ink-faint:#7E8B99;
+    --line:#DBE0E7;--line-soft:#E8ECF1;--brass:#1A5FCC;--brass-bg:#E3EDFB;
+    --signal:#3C5A73;--capture:#1E7A4D;--capture-bg:#DDF0E5;--gap:#BE4326;--gap-bg:#F7E4DE;
+    --shadow:0 1px 2px rgba(18,24,33,.05),0 10px 28px rgba(18,24,33,.07);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ground:#0A0E13;--panel:#161E29;--ink:#E7ECF2;--ink-soft:#9AA7B5;--ink-faint:#63707E;
+    --line:#232E3B;--line-soft:#1A2230;--brass:#4D93F0;--brass-bg:#0F2136;
+    --signal:#7CA4C4;--capture:#4FB985;--capture-bg:#0F241A;--gap:#E07C57;--gap-bg:#2A1712;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.5);
+  }}
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;margin:0}
+  a{color:var(--brass)}
+  h1,h2{font-family:"Sora",sans-serif;margin:0;letter-spacing:-.015em;line-height:1.15}
+  .wrap{max-width:680px;margin:0 auto;padding:0 18px}
+  header{padding:22px 0;border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .logo{font-family:"Sora",sans-serif;font-weight:800;font-size:20px;letter-spacing:.04em;color:var(--ink);text-decoration:none}
+  .logo b{color:var(--brass)}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em}
+  main{padding:36px 0 56px}
+  h1{font-size:clamp(26px,5vw,34px)}
+  .lead{color:var(--ink-soft);margin:10px 0 28px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:24px}
+  fieldset{border:0;margin:0 0 26px;padding:0}
+  legend{font-family:"Sora",sans-serif;font-weight:700;font-size:16px;margin-bottom:4px;padding:0}
+  .hint{color:var(--ink-faint);font-size:14px;margin:0 0 12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips label{position:relative}
+  .chips input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .chips span{display:inline-block;padding:7px 12px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink-soft);background:var(--panel);transition:.15s}
+  .chips input:checked + span{background:var(--brass-bg);border-color:var(--brass);color:var(--brass);font-weight:600}
+  .chips input:focus-visible + span{outline:2px solid var(--brass);outline-offset:2px}
+  select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  textarea{min-height:84px;resize:vertical}
+  button{font-family:"Sora",sans-serif;font-weight:700;font-size:15px;background:var(--brass);color:#fff;border:0;border-radius:8px;padding:13px 22px;cursor:pointer;width:100%}
+  button:disabled{opacity:.6;cursor:wait}
+  .msg{display:none;margin-top:16px;padding:12px 14px;border-radius:8px;font-size:15px}
+  .msg.ok{display:block;background:var(--capture-bg);color:var(--capture)}
+  .msg.err{display:block;background:var(--gap-bg);color:var(--gap)}
+  .side{margin-top:22px;font-size:14px;color:var(--ink-soft)}
+  .side p{margin:6px 0}
+  footer{border-top:1px solid var(--line);padding:22px 0;font-size:13px;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/">I<b>X</b>ARM</a>
+  <span class="tag">Radar · profil</span>
+</div></header>
+
+<main><div class="wrap">
+  <h1>Réglez votre veille</h1>
+  <p class="lead">Ces critères choisissent les appels d'offres et financements de votre e-mail hebdomadaire. Vous pouvez revenir sur cette page à tout moment depuis votre e-mail de bienvenue.</p>
+
+  <div class="card" id="nolink" hidden>
+    <p style="margin:0">Ce lien n'est pas complet. Ouvrez la page depuis le bouton « Compléter mon profil » de votre e-mail de bienvenue, ou écrivez-nous à <a href="mailto:radar@ixarm.fr">radar@ixarm.fr</a>.</p>
+  </div>
+
+  <form class="card" id="f" hidden>
+    <fieldset>
+      <legend>Domaines</legend>
+      <p class="hint">Cochez tout ce qui vous concerne.</p>
+      <div class="chips" id="dom"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Votre structure</legend>
+      <p class="hint">Sert à privilégier les marchés et financements à votre taille.</p>
+      <select name="stade" id="stade" required>
+        <option value="">Choisir…</option>
+        <option>Start-up</option><option>PME</option><option>ETI</option><option>Grand groupe</option>
+        <option>Laboratoire ou recherche</option><option>Cabinet de conseil</option><option>Fonds d'investissement</option><option>Autre</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>Région</legend>
+      <p class="hint">Les opportunités nationales et européennes restent incluses.</p>
+      <select name="region" id="region">
+        <option>Toute la France</option>
+        <option>Auvergne-Rhône-Alpes</option><option>Bourgogne-Franche-Comté</option><option>Bretagne</option><option>Centre-Val de Loire</option>
+        <option>Corse</option><option>Grand Est</option><option>Hauts-de-France</option><option>Île-de-France</option><option>Normandie</option>
+        <option>Nouvelle-Aquitaine</option><option>Occitanie</option><option>Pays de la Loire</option><option>Provence-Alpes-Côte d'Azur</option><option>Outre-mer</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mots-clés</legend>
+      <p class="hint">Technologies, produits ou programmes à surveiller, séparés par des virgules. Exemple : essaim, optronique, MCO hélicoptères.</p>
+      <textarea name="mots_cles" id="mots" maxlength="400"></textarea>
+    </fieldset>
+
+    <button type="submit" id="go">Enregistrer mon profil</button>
+    <div class="msg" id="msg" role="status"></div>
+  </form>
+
+  <div class="side">
+    <p><b>Gérer mon abonnement</b> : changer de carte, télécharger mes factures ou résilier, sans nous écrire. 👉 <a href="https://billing.stripe.com/p/login/00w7sL2uV1ae02V7VvbAs00">Espace de facturation</a> (connexion par l'e-mail utilisé au paiement).</p>
+    <p>Une question : <a href="mailto:radar@ixarm.fr">radar@ixarm.fr</a></p>
+  </div>
+</div></main>
+
+<footer><div class="wrap">IXARM · veille des financements et marchés de la défense · <a href="/">ixarm.fr</a></div></footer>
+
+<script>
+(function(){
+  var HOOK = "https://hook.eu1.make.com/94lkwxcu9k9gdla5idnzd1uomclo2r96";
+  var DOMAINES = ["Drones et robotique","Lutte anti-drones","Cyber","Spatial","Naval","Terrestre et blindés","Aéronautique","Munitions et énergétique","Électronique et capteurs","IA et logiciel","Communications et réseaux","Santé et soutien","Logistique et MCO","Formation et simulation","Dual et sécurité civile"];
+  var id = new URLSearchParams(location.search).get("id") || "";
+  if (!/^cus_[A-Za-z0-9]{8,40}$/.test(id)) { document.getElementById("nolink").hidden = false; return; }
+  var f = document.getElementById("f"); f.hidden = false;
+  var box = document.getElementById("dom");
+  DOMAINES.forEach(function(d){
+    var l = document.createElement("label");
+    l.innerHTML = '<input type="checkbox" name="d"><span></span>';
+    l.querySelector("input").value = d; l.querySelector("span").textContent = d;
+    box.appendChild(l);
+  });
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    var msg = document.getElementById("msg"), go = document.getElementById("go");
+    var doms = [].slice.call(f.querySelectorAll('input[name="d"]:checked')).map(function(i){return i.value;});
+    if (!doms.length) { msg.className = "msg err"; msg.textContent = "Cochez au moins un domaine."; return; }
+    var body = new URLSearchParams({
+      id: id,
+      domaines: doms.join(", "),
+      stade: document.getElementById("stade").value,
+      region: document.getElementById("region").value,
+      mots_cles: document.getElementById("mots").value.trim()
+    });
+    go.disabled = true; msg.className = "msg";
+    fetch(HOOK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() })
+      .then(function(){ msg.className = "msg ok"; msg.textContent = "Profil enregistré. Votre prochain e-mail Radar en tiendra compte."; })
+      .catch(function(){ msg.className = "msg err"; msg.textContent = "L'envoi a échoué. Réessayez dans un instant ou écrivez à radar@ixarm.fr."; })
+      .then(function(){ go.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>
