@@ -342,7 +342,7 @@
       <h1>La défense achète.<br>On vous dit quoi.</h1>
       <p class="lede">Appels d'offres, aides publiques, financeurs : IXARM lit l'écosystème défense chaque jour et vous indique où se trouve votre prochaine opportunité.</p>
       <div class="hero-cta">
-        <button class="btn light" onclick="go('prix')">IXARM Radar — 49 € HT/mois</button>
+        <button class="btn light" onclick="go('prix')">IXARM Radar — 29 € HT/mois</button>
         <button class="btn outline" onclick="go('fin')">Trouver mon financement</button>
         <button class="btn outline" onclick="go('intel')">Cartographie</button>
       </div>
@@ -485,10 +485,10 @@
     <div class="tiers">
       <div class="tier feature">
         <div class="tn">IXARM Radar</div>
-        <div class="price">49 €<small> HT/mois</small></div>
+        <div class="price">29 €<small> HT/mois</small></div>
         <div class="who">Pour les PME, start-up et laboratoires qui répondent, ou veulent répondre, à des marchés de défense.</div>
         <ul><li><b>Sources</b> : BOAMP (France) et TED (27 pays de l'UE), lues chaque jour</li><li><b>Tri sur votre profil</b> : 15 domaines (drones, cyber, naval…), taille, région, mots-clés</li><li><b>Un e-mail par semaine</b>, jusqu'à 8 avis expliqués : pourquoi pour vous, qui achète, quand répondre</li><li><b>Alerte échéance</b> quand une date limite tombe dans les 10 jours</li><li>Sans engagement, <b>résiliable en un clic</b></li></ul>
-        <button class="btn brass" onclick="subscribe('radar')">S'abonner — 49 € HT/mois</button>
+        <button class="btn brass" onclick="subscribe('radar')">S'abonner — 29 € HT/mois</button>
       </div>
       <div class="tier">
         <div class="tn">Exemple réel · semaine du 10/11/2026</div>
@@ -552,7 +552,7 @@ function closeModal(){document.getElementById("modal").classList.remove("on");}
 document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
 /* Liens Stripe Checkout (Payment Links) — remplir avec vos URLs Stripe pour activer le paiement self-service */
-var STRIPE={radar:"https://buy.stripe.com/dRmdR93yZdX05nf2BbbAs04"};
+var STRIPE={radar:"https://buy.stripe.com/aFa9ATd9zbOS3f76RrbAs06"};
 function subscribe(plan){var u=STRIPE[plan];if(u){window.open(u,"_blank","noopener");}else{openModal();}}
 function submitLead(){
   var em=document.getElementById("m-email").value.trim();
