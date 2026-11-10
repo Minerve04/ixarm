@@ -539,6 +539,7 @@
 <script>
 "use strict";
 (function(){var e=document.getElementById("utc");if(!e)return;function t(){var d=new Date();e.textContent=d.toISOString().slice(11,19)+" UTC";}t();setInterval(t,1000);})();
+(function(){var h=(location.hash||"").slice(1);if(/^(offres|radar|prix)$/.test(h))setTimeout(function(){go("prix")},0);})();
 function go(v){showView(v);window.scrollTo({top:0,behavior:"smooth"});}
 function showView(v){
   var views=document.querySelectorAll(".view");for(var i=0;i<views.length;i++)views[i].classList.toggle("on",views[i].id==="v-"+v);

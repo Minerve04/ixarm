@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
     --ground:#F2F4F7;--surface:#F9FAFC;--panel:#FFFFFF;--ink:#121821;--ink-soft:#4C5865;--ink-faint:#7E8B99;
@@ -143,6 +143,25 @@
   .sheet input{width:100%;font-family:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);margin-bottom:12px}
 
   @media (max-width:820px){.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.diag{grid-template-columns:1fr}.maps{grid-template-columns:1fr}.fcard .side{display:none}}
+
+  /* ===== Charte 2026 (famille defx.ai / Cercle Monge / SpacePulse) ===== */
+  h1,h2.vt,h3,h4,.brand .wm,.kpi{font-family:"Barlow Condensed","Sora",sans-serif}
+  h1,h2.vt{text-transform:uppercase;letter-spacing:.005em;line-height:.98;font-weight:700}
+  h3{letter-spacing:.01em}
+  .eyebrow{letter-spacing:.24em}
+  .brand .wm{font-weight:700;letter-spacing:.32em}
+  .btn{font-family:"Barlow Condensed",sans-serif!important;text-transform:uppercase;letter-spacing:.16em;border-radius:0!important;font-weight:700}
+  .card,.sheet,.analyse,.cta,.note,.fcard,.mapc,.rung,.seg,.search,.diag select,.dgout,.sheet input{border-radius:2px!important}
+  .topbar{background:#06080B;border-bottom:1px solid rgba(255,255,255,.08);--signal:#9AA6B2;--brass:#4D93F0}
+  .brand{color:#EDF1F5}.brand .wm{font-size:22px}
+  .brand .sub{color:#9AA6B2;border-left-color:rgba(255,255,255,.15)}
+  .plan{border-radius:0;background:none;border:1px solid #4D93F0;color:#4D93F0;font-family:"Barlow Condensed",sans-serif;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+  .acct{border-radius:0;color:#EDF1F5;border-color:rgba(255,255,255,.3)}
+  .tab{font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase}
+  h2.vt{font-size:clamp(30px,4vw,42px)}
+  @media (max-width:560px){.brand .sub,.plan{display:none}.brand .wm{letter-spacing:.2em}}
+  .demo{background:#0D1117;color:#9AA6B2;border-bottom:none}
+  .demo b{color:#EDF1F5}
 </style>
 </head>
 <body>
@@ -150,11 +169,11 @@
 <div class="topbar"><div class="wrap"><div class="row">
   <a class="brand" href="https://ixarm.fr"><svg viewBox="0 0 40 40" aria-hidden="true"><line x1="8" y1="8" x2="32" y2="32" stroke="var(--brass)" stroke-width="6.5" stroke-linecap="round"/><line x1="32" y1="8" x2="8" y2="32" stroke="var(--signal)" stroke-width="6.5" stroke-linecap="round"/></svg><span class="wm">IXARM</span><span class="sub">Espace membre</span></a>
   <span class="spacer"></span>
-  <span class="plan" id="planBadge">IXARM Pro</span>
+  <span class="plan" id="planBadge">Accès libre</span>
   <button class="acct" id="acctBtn"><span class="dot" id="acctDot">·</span><span id="acctName">Se connecter</span></button>
 </div></div></div>
 
-<div class="demo"><div class="wrap"><div class="row">⚠︎ <b>Accès de démonstration</b> — l'espace membre est ouvert le temps du lancement. Le verrou d'abonnement s'activera avec le paiement (Stripe).</div></div></div>
+<div class="demo"><div class="wrap"><div class="row">⚠︎ <b>Accès de démonstration</b> — l'espace membre est ouvert le temps du lancement. Pour recevoir chaque lundi les appels d'offres défense de votre domaine : IXARM Radar.</div></div></div>
 
 <div class="tabs"><div class="wrap" style="display:flex;gap:4px">
   <button class="tab" data-view="accueil" aria-selected="true">Accueil</button>
@@ -278,13 +297,13 @@
     <div class="grid g2">
       <div class="card">
         <h4>Abonnement</h4>
-        <h3 id="planName">IXARM Pro — 29 €/mois</h3>
-        <p class="muted">Fil intégral · navigateur &amp; diagnostic · annuaire BITD complet · digest hebdo.</p>
+        <h3 id="planName">Accès libre (lancement)</h3>
+        <p class="muted">Fil de signaux · navigateur &amp; diagnostic · annuaire BITD. La veille appels d'offres personnalisée est l'offre <a href="https://ixarm.fr/#offres">IXARM Radar</a> (49 € HT/mois).</p>
         <div class="qlinks">
           <button class="btn sm" id="billingBtn">Gérer la facturation</button>
           <button class="btn ghost sm" id="changePlan">Changer d'offre</button>
         </div>
-        <p class="empty" style="margin-top:10px">Le portail de facturation Stripe (changer de carte, résilier) s'activera avec le paiement.</p>
+        <p class="empty" style="margin-top:10px">Abonnés Radar : carte, factures et résiliation en un clic sur <a href="https://billing.stripe.com/p/login/00w7sL2uV1ae02V7VvbAs00">l'espace de facturation</a>.</p>
       </div>
       <div class="card">
         <h4>Profil</h4>
